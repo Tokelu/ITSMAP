@@ -3,4 +3,8 @@
     <string name="demoBtn1">Picker demo</string>
     <string name="demoBtn2">EditText demo</string>
     <string name="demoBtn3">Sliders Demo</string>
+    <string name="MainTxtView">Please Pick a Demo</string>
+    <string name="txtViewPickerDemo">Please pick a number and click OK.</string>
+    <string name="btnPickerDemoCancel">Cancel</string>
+    <string name="btnPickerDemoOK">OK</string>
 </resources>
