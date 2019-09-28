@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".JobActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/l_Margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/r_Margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/t_Margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/b_Margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="32dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/btn_restraint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="84dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/location_restraint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="184dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/notes_restraint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="481dp" />
+
+    <ImageView
+        android:id="@+id/activityJobImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/img_Size_Hori"
+        app:layout_constraintEnd_toStartOf="@+id/img_Size_Vert"
+        app:layout_constraintStart_toStartOf="@+id/l_Margin"
+        app:layout_constraintTop_toTopOf="@+id/t_Margin"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/activityJobTextViewCompany"
+        android:layout_width="@dimen/TextViewCompany"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/TextViewCompany"
+        app:layout_constraintStart_toStartOf="@+id/img_Size_Vert"
+        app:layout_constraintTop_toTopOf="@+id/t_Margin" />
+
+    <TextView
+        android:id="@+id/activityJobTextViewLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/TextViewLocation"
+        app:layout_constraintStart_toStartOf="@+id/img_Size_Vert"
+        app:layout_constraintTop_toBottomOf="@+id/activityJobTextViewCompany" />
+
+    <TextView
+        android:id="@+id/activityJobTextViewDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/TextViewDescription"
+        app:layout_constraintStart_toStartOf="@+id/l_Margin"
+        app:layout_constraintTop_toTopOf="@+id/location_restraint" />
+
+    <EditText
+        android:id="@+id/activityJobEditTextDescription"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:text="@string/EditTextDescription"
+        app:layout_constraintBottom_toTopOf="@+id/notes_restraint"
+        app:layout_constraintEnd_toStartOf="@+id/r_Margin"
+        app:layout_constraintStart_toStartOf="@+id/l_Margin"
+        app:layout_constraintTop_toBottomOf="@+id/activityJobTextViewDescription" />
+
+    <TextView
+        android:id="@+id/activityJobTextViewNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/TextViewNotes"
+        app:layout_constraintStart_toStartOf="@+id/l_Margin"
+        app:layout_constraintTop_toTopOf="@+id/notes_restraint" />
+
+    <EditText
+        android:id="@+id/activityJobEditTextNotes"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:text="@string/EditTextNotes"
+        app:layout_constraintBottom_toTopOf="@+id/Status_Restraint"
+        app:layout_constraintEnd_toStartOf="@+id/r_Margin"
+        app:layout_constraintStart_toStartOf="@+id/l_Margin"
+        app:layout_constraintTop_toBottomOf="@+id/activityJobTextViewNotes" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/Status_Restraint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="128dp" />
+
+    <TextView
+        android:id="@+id/activityJobTextViewStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/TextViewStatus"
+        app:layout_constraintBottom_toTopOf="@+id/btn_restraint"
+        app:layout_constraintStart_toStartOf="@+id/l_Margin"
+        app:layout_constraintTop_toTopOf="@+id/Status_Restraint" />
+
+    <TextView
+        android:id="@+id/activityJobTextViewStatusResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/TextViewStatusResult"
+        app:layout_constraintBottom_toTopOf="@+id/btn_restraint"
+        app:layout_constraintStart_toEndOf="@+id/activityJobTextViewStatus"
+        app:layout_constraintTop_toTopOf="@+id/Status_Restraint" />
+
+    <Button
+        android:id="@+id/activityJobButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@android:string/ok"
+        app:layout_constraintBottom_toTopOf="@+id/b_Margin"
+        app:layout_constraintEnd_toStartOf="@+id/r_Margin"
+        app:layout_constraintStart_toStartOf="@+id/l_Margin"
+        app:layout_constraintTop_toTopOf="@+id/btn_restraint" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_Size_Vert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="144dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/img_Size_Hori"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="144dp" />
+
+    <TextView
+        android:id="@+id/activityNotesTextViewJobtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/TextViewJobtitle"
+        app:layout_constraintStart_toStartOf="@+id/l_Margin"
+        app:layout_constraintTop_toTopOf="@+id/img_Size_Hori" />
+
+    <TextView
+        android:id="@+id/activityJobTextViewScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/TextViewScore"
+        app:layout_constraintEnd_toStartOf="@+id/r_Margin"
+        app:layout_constraintTop_toTopOf="@+id/img_Size_Hori" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/pct50Divider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50121653" />
+</androidx.constraintlayout.widget.ConstraintLayout>
