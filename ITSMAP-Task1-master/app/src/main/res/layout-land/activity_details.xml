@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GUI.DetailsActivity">
+
+    <ImageView
+        android:id="@+id/details_image"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars"
+        android:layout_marginLeft="16dp" />
+
+    <TextView
+        android:id="@+id/details_movieTitle_textView"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/editActivity_movieTitle_Placeholder"
+        android:textAlignment="center"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/details_image"
+        android:layout_marginLeft="16dp" />
+
+    <TextView
+        android:id="@+id/details_iMDB_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/iMDB_Rating_Placeholder"
+        app:layout_constraintBottom_toTopOf="@+id/details_userRating_textView"
+        app:layout_constraintStart_toEndOf="@+id/details_image"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:id="@+id/details_userRating_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:text="@string/editActivity_userRating_Placeholder"
+        app:layout_constraintBottom_toBottomOf="@+id/details_image"
+        app:layout_constraintStart_toEndOf="@+id/details_image"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:id="@+id/details_plot_textView"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/details_UserCommentPlaceholder_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/details_userComment_text"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/details_plot_textView" />
+
+    <TextView
+        android:id="@+id/details_GenresPlaceholder_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/details_genres_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/details_movieTitle_textView"
+        android:layout_marginLeft="16dp" />
+
+    <TextView
+        android:id="@+id/details_Genres_textView"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/details_movieTitle_textView"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/details_GenresPlaceholder_textView"
+        app:layout_constraintTop_toBottomOf="@+id/details_movieTitle_textView"
+        android:layout_marginLeft="8dp" />
+
+    <TextView
+        android:id="@+id/details_UserComment_textView"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/details_UserCommentPlaceholder_textView"
+        app:layout_constraintTop_toBottomOf="@+id/details_UserCommentPlaceholder_textView"
+        android:layout_marginRight="8dp" />
+
+    <Button
+        android:id="@+id/details_ok_btn"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="42dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="@android:string/ok"
+        android:textSize="14sp"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/details_UserComment_textView"
+        app:layout_constraintVertical_bias="0.924"
+        android:layout_marginRight="16dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/Plot"
+        app:layout_constraintStart_toEndOf="@+id/details_movieTitle_textView"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="28dp" />
+
+    <TextView
+        android:id="@+id/details_watchStatus_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="236dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/edit_movie_watched_status"
+        app:layout_constraintEnd_toEndOf="@+id/details_plot_textView"
+        app:layout_constraintStart_toEndOf="@+id/details_UserCommentPlaceholder_textView"
+        app:layout_constraintTop_toBottomOf="@+id/details_plot_textView"
+        android:layout_marginLeft="236dp" />
+
+</android.support.constraint.ConstraintLayout>

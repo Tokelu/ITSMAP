@@ -1,6 +1,7 @@
 package dk.witzell.jobsearchapp.adaptors;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.ArrayList;
+import java.util.List;
 
 import dk.witzell.jobsearchapp.R;
 import dk.witzell.jobsearchapp.models.Job;
@@ -17,27 +19,46 @@ import dk.witzell.jobsearchapp.models.Job;
 
 
 public class ListElementAdaptor extends BaseAdapter {
+
+    private static final Integer FROM_ADAPTOR = 100;
+
     private Context context;
-    private ArrayList<Job> jobs;
+    private List<Job> jobList;
     private Job job;
     //private string jobPrefix;
 
-    public ListElementAdaptor(Context c, ArrayList<Job> jobList) {
+    public ListElementAdaptor(List<Job> jobs, Context context)
+    {
+        jobList = jobs;
+        this.context = context;
+
+    }
+
+
+/*
+    public ListElementAdaptor(ArrayList<Job> jobList, Context c) {
         this.context = c;   //  Used for inflating views
         this.jobs = jobList; //  The list of actual jobs
+    }
+*/
+
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        //if(requestCode == FROM_ADAPTOR)
     }
 
     @Override
     public int getCount() {
         // returning job list size
-        if (jobs != null) return jobs.size();
+        if (jobList != null) return jobList.size();
         else return 0;
     }
 
     @Override
     public Object getItem(int position) {
         //  returning the job object from the list @ the "position"
-        if (jobs != null) return jobs.get(position);
+        if (jobList != null) return jobList.get(position);
         else return null;
     }
 
@@ -54,7 +75,7 @@ public class ListElementAdaptor extends BaseAdapter {
             convertView = jobInflator.inflate(R.layout.job_list_element, null);
         }
 
-        job = jobs.get(position);
+        job = jobList.get(position);
         if(job != null)
         {
             //  Declaring widgets
@@ -68,6 +89,11 @@ public class ListElementAdaptor extends BaseAdapter {
             txtViewCompanyName.setText(job.getCompanyName());
             txtViewCoolScore.setText(job.getCoolScore());
             imgViewLogo.setImageResource(job.getLogo());
+
+
+
+
+
         }
         return convertView;
     }
