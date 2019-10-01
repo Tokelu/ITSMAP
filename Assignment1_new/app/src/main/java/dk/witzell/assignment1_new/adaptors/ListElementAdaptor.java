@@ -14,11 +14,6 @@ package dk.witzell.assignment1_new.adaptors;
         import dk.witzell.assignment1_new.R;
         import dk.witzell.assignment1_new.models.Job;
 
-
-
-
-
-
 public class ListElementAdaptor extends BaseAdapter {
 
     private static final Integer FROM_ADAPTOR = 100;
