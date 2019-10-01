@@ -99,27 +99,16 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="331dp" />
 
-    <TextView
-        android:id="@+id/activityNotesTextViewNotes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/TextViewNotes"
-        app:layout_constraintStart_toStartOf="@+id/guideline22"
-        app:layout_constraintTop_toTopOf="@+id/t_Margin" />
-
     <EditText
-        android:id="@+id/activityNotesEditTextNote"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:editable="true"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        android:text="@string/EditTextNotes"
-        app:layout_constraintBottom_toTopOf="@+id/notesField"
+        android:hint="@string/TextViewNotes"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/appliedCheckbox"
         app:layout_constraintEnd_toStartOf="@+id/r_Margin"
         app:layout_constraintStart_toStartOf="@+id/guideline22"
-        app:layout_constraintTop_toBottomOf="@+id/activityNotesTextViewNotes" />
+        app:layout_constraintTop_toTopOf="@+id/t_Margin" />
 
     <Button
         android:id="@+id/activityNotesTextViewCancelBtn"

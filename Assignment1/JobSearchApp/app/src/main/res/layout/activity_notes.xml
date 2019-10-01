@@ -92,34 +92,22 @@
         app:layout_constraintStart_toStartOf="@+id/l_Margin"
         app:layout_constraintTop_toTopOf="@+id/coolnessScore" />
 
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="@string/TextViewNotes"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/notesField"
+        app:layout_constraintEnd_toStartOf="@+id/r_Margin"
+        app:layout_constraintStart_toStartOf="@+id/l_Margin"
+        app:layout_constraintTop_toTopOf="@+id/appliedCheckbox" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/appliedCheckbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="232dp" />
-
-    <TextView
-        android:id="@+id/activityNotesTextViewNotes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/TextViewNotes"
-        app:layout_constraintStart_toStartOf="@+id/l_Margin"
-        app:layout_constraintTop_toTopOf="@+id/appliedCheckbox" />
-
-    <EditText
-        android:id="@+id/activityNotesEditTextNote"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:editable="true"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        android:text="@string/EditTextNotes"
-        app:layout_constraintBottom_toTopOf="@+id/notesField"
-        app:layout_constraintEnd_toStartOf="@+id/r_Margin"
-        app:layout_constraintStart_toStartOf="@+id/l_Margin"
-        app:layout_constraintTop_toBottomOf="@+id/activityNotesTextViewNotes" />
 
     <Button
         android:id="@+id/activityNotesTextViewCancelBtn"
