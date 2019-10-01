@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">L03 There and back Again</string>
-    <string name="pageOneText">Welcome!</string>
-    <string name="pageOneBtnTxt">Click me to go to page two.</string>
-    <string name="pageTwoText">Oh Hai!</string>
-    <string name="pageTwoBtnTxt">Click to go back</string>
-</resources>
