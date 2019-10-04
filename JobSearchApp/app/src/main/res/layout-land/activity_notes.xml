@@ -35,7 +35,7 @@
         app:layout_constraintGuide_begin="16dp" />
 
     <TextView
-        android:id="@+id/activityNotesTextViewJobtitle"
+        android:id="@+id/activityJobTextViewJobtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/TextViewJobtitle"
@@ -49,7 +49,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/TextViewCompany"
         app:layout_constraintStart_toStartOf="@+id/l_Margin"
-        app:layout_constraintTop_toBottomOf="@+id/activityNotesTextViewJobtitle" />
+        app:layout_constraintTop_toBottomOf="@+id/activityJobTextViewJobtitle" />
 
     <TextView
         android:id="@+id/activityNotesTextViewScore"

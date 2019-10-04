@@ -23,7 +23,7 @@ import dk.witzell.jobsearchapp.utils.DrawableGenerator;
 
 public class ListElementAdaptor extends RecyclerView.Adapter<ListElementAdaptor.ViewHolder>
 {
-    private static final String ADAPTOR_POSITION = "Adaptor Position";
+    public static final String ADAPTOR_POSITION = "Adaptor Position";
     private static final Integer JOB_FROM_ADAPTOR_CODE = 100;
     public static String JOB_FROM_ADAPTOR = "Adaptor Job";
     private DrawableGenerator drawableGenerator;
