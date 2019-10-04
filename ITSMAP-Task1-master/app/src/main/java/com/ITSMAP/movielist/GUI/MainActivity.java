@@ -49,11 +49,11 @@ public class MainActivity extends AppCompatActivity {
         exitBtn.setOnClickListener(v -> finish());
     }
 
-    private List getDataFromCsvFile() {
-        InputStream stream = getResources().openRawResource(R.raw.movielist);
-        CSVReader reader = new CSVReader(stream);
-        return reader.getMovies();
-    }
+        private List getDataFromCsvFile() {
+            InputStream stream = getResources().openRawResource(R.raw.movielist);
+            CSVReader reader = new CSVReader(stream);
+            return reader.getMovies();
+        }
 
     private ArrayList<Movie> getMovieObjects(List<Movie> data) {
         ArrayList<Movie> movieList = new ArrayList<>();

@@ -67,6 +67,7 @@ public class ListElementAdaptor extends RecyclerView.Adapter<ListElementAdaptor.
         TextView txtViewJobTitle;
         TextView txtViewCoolScore;
         ImageView imgViewLogo;
+        TextView txtViewApplied;
 
         public ViewHolder(View itemView)
         {
@@ -75,6 +76,8 @@ public class ListElementAdaptor extends RecyclerView.Adapter<ListElementAdaptor.
             txtViewCompanyName = itemView.findViewById(R.id.jobListElementTextViewCompany);
             txtViewJobTitle = itemView.findViewById(R.id.jobListElementTextViewJobTitle);
             txtViewCoolScore = itemView.findViewById(R.id.jobListElementTextViewCoolnessScore);
+            txtViewApplied = itemView.findViewById(R.id.jobListElementTextViewApplied);
+
             imgViewLogo = itemView.findViewById(R.id.jobListElementLogo);
 
             itemView.setOnClickListener(v -> { Job clickedJob = jobList.get(getAdapterPosition());

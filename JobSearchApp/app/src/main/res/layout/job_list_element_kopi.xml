@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/jobListElementLogo"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:contentDescription="@string/contentDescriptorImage"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/jobListElementTextViewCompany"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/TextViewCompany"
+        tools:layout_editor_absoluteX="136dp"
+        tools:layout_editor_absoluteY="22dp" />
+
+    <TextView
+        android:id="@+id/jobListElementTextViewJobTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/TextViewJobtitle"
+        tools:layout_editor_absoluteX="136dp"
+        tools:layout_editor_absoluteY="58dp" />
+
+    <TextView
+        android:id="@+id/jobListElementTextViewApplied"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="353dp"
+        tools:layout_editor_absoluteY="102dp" />
+
+    <TextView
+        android:id="@+id/jobListElementTextViewCoolnessScore"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:text="@string/TextViewScore"
+        tools:layout_editor_absoluteX="231dp"
+        tools:layout_editor_absoluteY="221dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

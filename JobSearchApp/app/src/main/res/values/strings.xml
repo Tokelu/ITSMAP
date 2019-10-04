@@ -4,14 +4,14 @@
     <string name="activityListTextView">My Jobs</string>
     <string name="ExitButton">Exit</string>
     <string name="TextViewCompany">Company Name</string>
-    <string name="TextViewScore">Coolness Score:</string>
+    <string name="TextViewScore">5.5</string>
     <string name="TextViewJobtitle">Job Title</string>
     <string name="TextViewDescription">Job Description</string>
     <string name="EditTextDescription">JobDescriptionField</string>
     <string name="TextViewNotes">Notes</string>
     <string name="EditTextNotes">Notes Field</string>
     <string name="TextViewStatus">Status:</string>
-    <string name="TextViewStatusResult">Status Result</string>
+    <string name="TextViewStatusResult">Not Applied</string>
     <string name="OK_Button">OK</string>
     <string name="TextViewLocation">Location</string>
     <string name="activityNotesCheckBox">Applied</string>

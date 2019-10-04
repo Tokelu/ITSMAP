@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             listElementAdaptor = new ListElementAdaptor(jobsList, this);
         }
 
-        //recyclerView.setAdapter(listElementAdaptor);
+        recyclerView.setAdapter(listElementAdaptor);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         btnExit.setOnClickListener(v -> finish());
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < fileData.size(); i++)
         {
             Job currentJob = fileData.get(i);
-            if(!currentJob.getLocation().equals("location"))
+            if(!currentJob.getCompanyName().equals("company"))
             {
                 jobList.add(currentJob);
             }

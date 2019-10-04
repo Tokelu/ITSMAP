@@ -18,6 +18,7 @@ public class Job implements Parcelable
     private String  jobDescription;
     private String  notes;
     private boolean status;
+    private String  statusResult;
     //endregion
 
     //region Getters
@@ -36,12 +37,13 @@ public class Job implements Parcelable
     void setAppTitle(String appTitle)               { this.appTitle = appTitle; }
     void setCompanyName(String companyName)         { this.companyName = companyName; }
     void setJobTitle(String jobTitle)               { this.jobTitle = jobTitle; }
-    public void setCoolScore(String coolScore)             { this.coolScore = coolScore; }
-    void setLogo(){}
+    public void setCoolScore(String coolScore)      { this.coolScore = coolScore; }
+    void setLogo()                                  {}
     void setLocation(String location)               { this.location = location; }
     void setJobDescription(String jobDescription)   { this.jobDescription = jobDescription; }
-    public void setNotes(String notes)                     { this.notes = notes; }
-    public void setStatus(boolean applied)                 { this.status = applied; }
+    public void setNotes(String notes)              { this.notes = notes; }
+    public void setStatus(boolean applied)          { this.status = applied; }
+    public void setStatusResult(String applied)     { this.statusResult = applied; }
     //endregion
 
 
@@ -51,6 +53,7 @@ public class Job implements Parcelable
         this.jobTitle       = jobTitle;
         this.coolScore      = coolScore;
         this.jobDescription = jobDescription;
+        this.statusResult   = "Not Applied";
     }
 
     @Override
