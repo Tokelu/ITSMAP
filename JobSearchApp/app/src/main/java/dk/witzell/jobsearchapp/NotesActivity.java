@@ -19,23 +19,25 @@ import dk.witzell.jobsearchapp.models.Job;
 
 public class NotesActivity extends AppCompatActivity
 {
-    private TextView    jobTitle;
     private TextView    companyName;
+    private TextView    jobTitle;
     private TextView    coolScore;
     private SeekBar     seekBarRating;
-    private float       seekBarValue;
-    private CheckBox    appliedCheckBox;
     private EditText    notes;
     private Button      ok_Btn;
     private Button      cancel_Btn;
+
+    private float       seekBarValue;
+    private CheckBox    appliedCheckBox;
     private Job         clickedJob;
 
-    private String SEEKBAR_VALUE_KEY = "seekBarValue";
-    private String APPLIED_STATUS_KEY = "appliedStatus";
-    private String NOTES_KEY = "notesText";
-    private String JOB_TITLE_KEY = "jobTitle";
-    private String USER_COOLNESS_RATING_KEY = "userCoolnessRating";
-    private String COMPANY_NAME_KEY = "companyName";
+    private String      SEEKBAR_VALUE_KEY = "seekBarValue";
+    private String      APPLIED_STATUS_KEY = "appliedStatus";
+    private String      NOTES_KEY = "notesText";
+    private String      USER_COOLNESS_RATING_KEY = "userCoolnessRating";
+    //private String      JOB_TITLE_KEY = "jobTitle";
+    //private String      COMPANY_NAME_KEY = "companyName";
+
     private int ADAPTER_POSITION_FROM_RECYCLE_VIEW;
 
     @Override
@@ -45,7 +47,7 @@ public class NotesActivity extends AppCompatActivity
         setContentView(R.layout.activity_notes);
         initializeIU();
         Intent intent = getIntent();
-        clickedJob = Objects.requireNonNull(intent.getExtras()).getParcelable(ListElementAdaptor.JOB_FROM_ADAPTOR);
+        clickedJob = (Job) intent.getExtras().getSerializable(ListElementAdaptor.JOB_FROM_ADAPTOR); // clickedJob = Objects.requireNonNull(intent.getExtras()).getParcelable(ListElementAdaptor.JOB_FROM_ADAPTOR);
         ADAPTER_POSITION_FROM_RECYCLE_VIEW = intent.getIntExtra(ListElementAdaptor.ADAPTOR_POSITION, 0);
         if (savedInstanceState != null)
         {
@@ -53,15 +55,15 @@ public class NotesActivity extends AppCompatActivity
             boolean checkBox = savedInstanceState.getBoolean(APPLIED_STATUS_KEY);
             boolean hasCoolnessScore = savedInstanceState.getBoolean(USER_COOLNESS_RATING_KEY);
             String oldNotes = savedInstanceState.getString(NOTES_KEY);
-            String oldJobTitle = savedInstanceState.getString(JOB_TITLE_KEY);
-            String oldCompanyName = savedInstanceState.getString(COMPANY_NAME_KEY);
+            //String oldJobTitle = savedInstanceState.getString(JOB_TITLE_KEY);
+            //String oldCompanyName = savedInstanceState.getString(COMPANY_NAME_KEY);
 
             clickedJob.setHasCoolnessScore(hasCoolnessScore);
             seekBarRating.setProgress(oldSeekBarValue);
             appliedCheckBox.setChecked(checkBox);
             notes.setText(oldNotes);
-            jobTitle.setText(oldJobTitle);
-            companyName.setText(oldCompanyName);
+            //jobTitle.setText(oldJobTitle);
+            //companyName.setText(oldCompanyName);
             if (!hasCoolnessScore)
             {
                 coolScore.setText("Set your Coolness Score");
@@ -69,7 +71,8 @@ public class NotesActivity extends AppCompatActivity
             else
             {
                 seekBarValue = ((float) oldSeekBarValue / 10);
-                coolScore.setText(String.valueOf(seekBarValue));
+                coolScore.setText("Coolness Score: ");
+                coolScore.append("" + seekBarValue);
             }
         }
         else
@@ -93,7 +96,8 @@ public class NotesActivity extends AppCompatActivity
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
             {
                 seekBarValue =((float) progress /10);
-                coolScore.setText(String.valueOf(seekBarValue));
+                coolScore.setText("Coolness Rate: ");
+                coolScore.append(String.valueOf(seekBarValue));
             }
 
             @Override
@@ -109,29 +113,32 @@ public class NotesActivity extends AppCompatActivity
 
     private void initializeIU()
     {
-        jobTitle        = findViewById(R.id.activityJobTextViewJobtitle );
         companyName     = findViewById(R.id.activityNotesTextViewCompany);
+        jobTitle        = findViewById(R.id.activityJobTextViewJobtitle );
         coolScore       = findViewById(R.id.activityNotesTextViewScore);
         seekBarRating   = findViewById(R.id.activityNotesSeek);
-        appliedCheckBox = findViewById(R.id.activityNotesCheckBox);
         notes           = findViewById(R.id.activityNotesEditTextNote);
+        appliedCheckBox = findViewById(R.id.activityNotesCheckBox);
         ok_Btn          = findViewById(R.id.activityNotesTextViewOKBtn);
         cancel_Btn      = findViewById(R.id.activityNotesTextViewCancelBtn);
     }
 
     private void updateIU(Job job)
     {
+        companyName.setText(job.getCompanyName());
+        jobTitle.setText(job.getJobTitle());
+
         if (job.hasCoolnessScore())
         {
-            coolScore.setText("Coolness Score: ");
-            coolScore.append(job.getCoolScore());
+            //coolScore.setText("Coolness Score: ");
+            coolScore.setText(job.getCoolScore());
             float coolnessScore = Float.valueOf(job.getCoolScore());
             seekBarRating.setProgress(Math.round(coolnessScore * 10));
             seekBarValue = ((float) seekBarRating.getProgress() / 10);
         }
         else
         {
-            coolScore.setText("Set your Coolness Score");
+            coolScore.setText("Set your Coolness Score: ");
         }
 
         if (job.hasApplied())
@@ -146,7 +153,7 @@ public class NotesActivity extends AppCompatActivity
         }
         else
         {
-            notes.setText("Write any notes here:");
+            notes.setText(" ");
         }
     }
 
@@ -154,8 +161,8 @@ public class NotesActivity extends AppCompatActivity
     {
         job.setCoolScore(String.valueOf(seekBarValue));
         job.setHasCoolnessScore(true);
-        job.setHasUserNotes(true);
         job.setNotes(notes.getText().toString());
+        job.setHasUserNotes(true);
         if (appliedCheckBox.isChecked())
         {
             job.setStatus(true);
@@ -171,11 +178,12 @@ public class NotesActivity extends AppCompatActivity
     public void onSaveInstanceState(Bundle savedInstanceState)
     {
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putInt(SEEKBAR_VALUE_KEY, seekBarRating.getProgress());
-        savedInstanceState.putBoolean(APPLIED_STATUS_KEY, appliedCheckBox.isChecked());
-        savedInstanceState.putString(NOTES_KEY, notes.getText().toString());
-        savedInstanceState.putString(JOB_TITLE_KEY, jobTitle.getText().toString());
-        savedInstanceState.putString(COMPANY_NAME_KEY, companyName.getText().toString());
-        savedInstanceState.putString(USER_COOLNESS_RATING_KEY, coolScore.getText().toString());
+        savedInstanceState.putSerializable("", clickedJob);
+//        savedInstanceState.putInt(SEEKBAR_VALUE_KEY, seekBarRating.getProgress());
+//        savedInstanceState.putBoolean(APPLIED_STATUS_KEY, appliedCheckBox.isChecked());
+//        savedInstanceState.putString(NOTES_KEY, notes.getText().toString());
+//        savedInstanceState.putString(JOB_TITLE_KEY, jobTitle.getText().toString());
+//        savedInstanceState.putString(COMPANY_NAME_KEY, companyName.getText().toString());
+//        savedInstanceState.putString(USER_COOLNESS_RATING_KEY, coolScore.getText().toString());
     }
 }

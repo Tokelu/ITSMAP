@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
         Button btnExit = findViewById(R.id.activityListButton);
 
-        jobsList = getPrevSessionJobList(getString(R.string.PREV_SESSION_JOB_LIST));
+        jobsList = getJobListFromPrevSession(getString(R.string.PREV_SESSION_JOB_LIST));
         if (jobsList != null)
         {
             listElementAdaptor = new ListElementAdaptor(jobsList, this);
@@ -77,9 +77,10 @@ public class MainActivity extends AppCompatActivity {
 
         for (Job job : jobList)
         {
-            job.setNotes("");
-            job.setCoolScore("NA");
+            job.setHasUserNotes(false);     //job.setNotes("");
+            job.setHasCoolnessScore(false); //job.setCoolScore("NA");
             job.setStatus(false);
+            job.setCoolScore(job.getCoolScore());
         }
         return jobList;
     }
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        listElementAdaptor.onActivityResult(requestCode,resultCode,data);
+        listElementAdaptor.onActivityResult(requestCode, resultCode, data);
     }
 
 
@@ -104,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
     }
 
-    private List<Job> getPrevSessionJobList(String index) {
+    private List<Job> getJobListFromPrevSession(String index) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Gson gson = new Gson();
         String json = sharedPreferences.getString(index, null);
@@ -112,11 +113,12 @@ public class MainActivity extends AppCompatActivity {
         return gson.fromJson(json, type);
     }
 
- /*   @Override
-    protected void OnActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        listElementAdaptor.onActivityResult(requestCode,resultCode,data);
+//    @Override
+//    protected void OnActivityResult(int requestCode, int resultCode, Intent data)
+//    {
+//        listElementAdaptor.onActivityResult(requestCode, resultCode, data);
+//    }
 
-   */
+
 }
 

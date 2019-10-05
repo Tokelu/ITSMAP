@@ -3,6 +3,7 @@ package dk.witzell.jobsearchapp.adaptors;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,9 +34,9 @@ public class ListElementAdaptor extends RecyclerView.Adapter<ListElementAdaptor.
 
     public ListElementAdaptor(List<Job> jobs, Context context)
     {
-        this.jobList = jobs;
+        jobList = jobs;
         this.context = context;
-        this.drawableGenerator = new DrawableGenerator(context);
+        drawableGenerator = new DrawableGenerator(context);
     }
 
     @NonNull
@@ -52,8 +53,10 @@ public class ListElementAdaptor extends RecyclerView.Adapter<ListElementAdaptor.
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i)
     {
         Job currentJob = jobList.get(i);
-        viewHolder.txtViewCompanyName.setText(currentJob.getCompanyName());
-        viewHolder.txtViewJobTitle.setText(currentJob.getJobTitle());
+        //viewHolder.txtViewCompanyName.setText(currentJob.getCompanyName());
+        //viewHolder.txtViewJobTitle.setText(currentJob.getJobTitle());
+        //ViewHolder.txtViewApplied.setText("NA");
+        //ViewHolder.txtViewApplied.setText(currentJob.hasApplied() ? "Applied" : "Not applied");
         viewHolder.txtViewCoolScore.setText(currentJob.getCoolScore());
         viewHolder.imgViewLogo.setImageDrawable(drawableGenerator.getDrawableByName(currentJob));
     }
@@ -77,39 +80,44 @@ public class ListElementAdaptor extends RecyclerView.Adapter<ListElementAdaptor.
             txtViewJobTitle = itemView.findViewById(R.id.jobListElementTextViewJobTitle);
             txtViewCoolScore = itemView.findViewById(R.id.jobListElementTextViewCoolnessScore);
             txtViewApplied = itemView.findViewById(R.id.jobListElementTextViewApplied);
-
             imgViewLogo = itemView.findViewById(R.id.jobListElementLogo);
 
-            itemView.setOnClickListener(v -> { Job clickedJob = jobList.get(getAdapterPosition());
-            Intent detailsIntent = new Intent(context, JobActivity.class);
-            detailsIntent.putExtra(JOB_FROM_ADAPTOR, clickedJob);
-            context.startActivity(detailsIntent);
-            });
+            itemView.setOnClickListener(v ->
+                {
+                    Job clickedJob = jobList.get(getAdapterPosition());
+                    Intent detailsIntent = new Intent(context, JobActivity.class);
+                    detailsIntent.putExtra(JOB_FROM_ADAPTOR, clickedJob);
+                    context.startActivity(detailsIntent);
+                });
 
             itemView.setOnLongClickListener( v ->
-            {
-                Job clickedJob = jobList.get(getAdapterPosition());
-                Intent detailsIntent = new Intent(context, NotesActivity.class);
-                detailsIntent.putExtra(JOB_FROM_ADAPTOR, clickedJob);
-                detailsIntent.putExtra(ADAPTOR_POSITION, getAdapterPosition());
-                ((Activity) context).startActivityForResult(detailsIntent, JOB_FROM_ADAPTOR_CODE);
-                return true;
-            });
+                {
+                    Job clickedJob = jobList.get(getAdapterPosition());
+                    Intent detailsIntent = new Intent(context, NotesActivity.class);
+                    detailsIntent.putExtra(JOB_FROM_ADAPTOR, clickedJob);
+                    detailsIntent.putExtra(ADAPTOR_POSITION, getAdapterPosition());
+                    ((Activity) context).startActivityForResult(detailsIntent, JOB_FROM_ADAPTOR_CODE);
+                    return true;
+                });
         }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
+        Log.d("ListElementAdaptor", "onActivityResult");
         if(requestCode == JOB_FROM_ADAPTOR_CODE)
         {
             if(resultCode == Activity.RESULT_OK)
             {
-                Job updatedJob = Objects.requireNonNull(data.getExtras()).getParcelable("key");
+                Job updateJob = (Job) data.getSerializableExtra("key");               //Objects.requireNonNull(data.getExtras()).getParcelable("key");
                 int dataToReplace = data.getIntExtra(ADAPTOR_POSITION, 0);
-                jobList.set(dataToReplace, updatedJob);
+                jobList.set(dataToReplace, updateJob);
                 notifyDataSetChanged();
             }
             if(resultCode == Activity.RESULT_CANCELED) {}
         }
     }
+
+
+
 }

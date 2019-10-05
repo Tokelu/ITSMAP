@@ -27,11 +27,11 @@ public class csvParser
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         try
         {
-            String row;
-            while ((row = reader.readLine()) != null)
+            String line;
+            while ((line = reader.readLine()) != null)
             {
-                String[] col = row.split(";");
-                list.add(new Job(col[0], col[1], col[2], col[3]));
+                String[] row = line.split(";");
+                list.add(new Job(row[0], row[1], row[2], row[3]));
             }
         }
         catch (IOException ex)

@@ -50,12 +50,12 @@
         <TextView
             android:id="@+id/jobListElementTextViewJobTitle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="19dp"
             android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
             android:text="@string/TextViewJobtitle"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/jobListElementLogo" />
+            app:layout_constraintStart_toEndOf="@+id/jobListElementLogo"
+            app:layout_constraintTop_toBottomOf="@+id/jobListElementTextViewCompany" />
 
         <TextView
             android:id="@+id/jobListElementTextViewCompany"

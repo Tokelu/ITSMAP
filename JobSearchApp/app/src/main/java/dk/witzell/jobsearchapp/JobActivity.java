@@ -1,8 +1,8 @@
 package dk.witzell.jobsearchapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,18 +16,24 @@ import dk.witzell.jobsearchapp.utils.DrawableGenerator;
 
 public class JobActivity extends AppCompatActivity
 {
-    private TextView    companyName;
-    private TextView    location;
     private ImageView   logo;
+    private TextView    companyName;
     private TextView    jobTitle;
+    private TextView    location;
     private TextView    description;
     private TextView    notes;
     private TextView    status;
-    private TextView    statusResult;
+    private TextView    coolnessScore;
+
     private Button      ok_Btn;
+
     private DrawableGenerator drawableGenerator;
+
+    private TextView    statusResult;
+
     private Job         clickedJob;
     private String JOB_OBJECT_KEY = "Job";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -38,48 +44,58 @@ public class JobActivity extends AppCompatActivity
         initializeUI();
         if (savedInstanceState != null)
         {
-            clickedJob = savedInstanceState.getParcelable(JOB_OBJECT_KEY);
+            clickedJob = (Job) savedInstanceState.getSerializable(JOB_OBJECT_KEY);
             updateUI(Objects.requireNonNull(clickedJob));
         }
         else
         {
-            clickedJob = Objects.requireNonNull(getIntent().getExtras()).getParcelable(ListElementAdaptor.JOB_FROM_ADAPTOR);
+            clickedJob = (Job) Objects.requireNonNull(getIntent().getExtras()).getSerializable(ListElementAdaptor.JOB_FROM_ADAPTOR);
             updateUI(Objects.requireNonNull(clickedJob));
         }
-
+        ok_Btn.setOnClickListener(v -> finish());
     }
 
 
     private void initializeUI()
     {
         companyName = findViewById(R.id.activityJobTextViewCompany);
+        jobTitle = findViewById(R.id.activityJobTextViewJobtitle);
         location = findViewById(R.id.activityJobTextViewLocation);
         logo = findViewById(R.id.activityJobImageView);
-        jobTitle = findViewById(R.id.activityJobTextViewJobtitle);
-        description = findViewById(R.id.activityJobTextViewDescription);
-        notes = findViewById(R.id.activityJobTextViewNotes);
+        description = findViewById(R.id.activityJobEditTextDescription);
+        notes = findViewById(R.id.activityJobEditTextNotes);
         status = findViewById(R.id.activityJobTextViewStatus);
         statusResult = findViewById(R.id.activityJobTextViewStatusResult);
         ok_Btn = findViewById(R.id.activityJobButton);
+        coolnessScore = findViewById(R.id.activityJobTextViewScore);
+        //description.setMovementMethod(new ScrollingMovementMethod());
     }
 
     private void updateUI(Job job)
     {
         //this.setTitle(job.getCompanyName());
+        jobTitle.setText(job.getJobTitle());
         companyName.setText(job.getCompanyName());
         location.setText(job.getLocation());
-        logo.setImageDrawable(drawableGenerator.getDrawableByName(job));
-        jobTitle.setText(job.getJobTitle());
-        description.setText(job.getjobDescription());
-        notes.setText(job.getNotes());
+        description.setText(job.getJobDescription());
         status.setText((job.getStatus()? "Applied" : "Not Applied"));
+        notes.setText(job.getNotes());
+        logo.setImageDrawable(drawableGenerator.getDrawableByName(job));
+        if (job.hasCoolnessScore())
+        {
+            coolnessScore.setText(job.getCoolScore());
+        }
+        else
+        {
+            coolnessScore.setText("-");
+        }
     }
 
     @Override
-    public void onSaveInstanceState(Bundle savedInstanceState)
+    public void onSaveInstanceState(@NonNull Bundle savedInstanceState)
     {
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putParcelable(JOB_OBJECT_KEY, clickedJob);
+        savedInstanceState.putSerializable(JOB_OBJECT_KEY, clickedJob);
     }
 
 

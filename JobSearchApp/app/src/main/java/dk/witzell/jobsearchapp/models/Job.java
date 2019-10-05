@@ -5,66 +5,83 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-public class Job implements Parcelable
-{
+import java.io.Serializable;
 
-    //region Fields / Variables
-    private String  appTitle;
-    private int     logo;               // need to assign some kind of ID to each logo image
+public class Job implements Serializable
+{
     private String  companyName;
     private String  jobTitle;
-    private String  coolScore;
     private String  location;
     private String  jobDescription;
+    private String  coolScore;
     private String  notes;
+
     private boolean status;
-    private String  statusResult;
+    private boolean applied;
     private boolean coolnessScore;
     private boolean userNotes;
-    private boolean applied;
-    //endregion
 
-    //region Getters
-    public String   getAppTitle()       {return appTitle;}
-    public String   getCompanyName()    {return companyName;}
-    public String   getJobTitle()       {return jobTitle;}
-    public String   getCoolScore()      {return coolScore;}
-    public int      getLogo()           {return logo;}
-    public String   getLocation()       {return location;}
-    public String   getjobDescription() {return jobDescription;}
-    public String   getNotes()          {return notes;}
-    public Boolean  getStatus()         {return status;}
-    //endregion
-
-    //region Setters
-    void setAppTitle(String appTitle)                   { this.appTitle = appTitle; }
-    void setCompanyName(String companyName)             { this.companyName = companyName; }
-    void setJobTitle(String jobTitle)                   { this.jobTitle = jobTitle; }
-    public void setCoolScore(String coolScore)          { this.coolScore = coolScore; }
-    void setLogo()                                      { this.logo = logo; }
-    void setLocation(String location)                   { this.location = location; }
-    void setJobDescription(String jobDescription)       { this.jobDescription = jobDescription; }
-    public void setNotes(String notes)                  { this.notes = notes; }
-    public void setStatus(boolean applied)              { this.status = applied; }
-    public void setStatusResult(String applied)         { this.statusResult = applied; }
-    public void setHasCoolnessScore(boolean hasCoolnessScore) { this.coolnessScore = hasCoolnessScore; }
-    public void setHasUserNotes(boolean hasUserNotes)   { this.userNotes = hasUserNotes; }
+    //region Fields / Variables
+    private String  appTitle = "My Jobs";
+    private int     logo;               // need to assign some kind of ID to each logo image
+    private String  statusResult;
     //endregion
 
 
-    public boolean hasCoolnessScore()   {return coolnessScore;}
-    public boolean hasUserNotes()       {return userNotes;}
-    public boolean hasApplied()         {return applied;}
 
-    public Job(String companyName, String jobTitle, String coolScore, String jobDescription)
+    public Job(String companyName, String location, String jobTitle, String jobDescription)
     {
         this.companyName    = companyName;
-        this.jobTitle       = jobTitle;
-        this.coolScore      = coolScore;
         this.jobDescription = jobDescription;
-        this.statusResult   = "Not-Applied";
+        this.jobTitle       = jobTitle;
+        this.location       = location;
     }
 
+
+//    public Job(String companyName, String jobTitle, String coolScore, String jobDescription, String location )
+//    {
+//        this.companyName    = companyName;
+//        this.jobDescription = jobDescription;
+//        this.jobTitle       = jobTitle;
+//        this.location       = location;
+//        this.coolScore      = coolScore;
+//
+//        this.statusResult   = "Not-Applied";
+//    }
+
+
+    public String   getCompanyName()    {return companyName;}
+    public String   getJobDescription() {return jobDescription;}
+    public String   getJobTitle()       {return jobTitle;}
+    public String   getLocation()       {return location;}
+    public String   getNotes()          {return notes;}
+    public boolean  hasCoolnessScore()  {return coolnessScore;}
+    public boolean  hasUserNotes()      {return userNotes;}
+    public boolean  hasApplied()        {return applied;}
+    public String   getAppTitle()       {return appTitle;}
+    public String   getCoolScore()      {return coolScore;}
+    public int      getLogo()           {return logo;}
+    public Boolean  getStatus()         {return status;}
+
+
+
+    void setCompanyName(String companyName)             { this.companyName = companyName; }
+    void setJobDescription(String jobDescription)       { this.jobDescription = jobDescription; }
+    void setJobTitle(String jobTitle)                   { this.jobTitle = jobTitle; }
+    void setLocation(String location)                   { this.location = location; }
+    public void setNotes(String notes)                  { this.notes = notes; }
+    public void setStatus(boolean applied)              { this.status = applied; }
+    public void setCoolScore(String coolScore)          { this.coolScore = coolScore; }
+    public void setHasCoolnessScore(boolean hasCoolnessScore) { this.coolnessScore = hasCoolnessScore; }
+    public void setHasUserNotes(boolean hasUserNotes)   { this.userNotes = hasUserNotes; }
+
+
+    public void setStatusResult(String applied)         { this.statusResult = applied; }
+    void setAppTitle(String appTitle)                   { this.appTitle = appTitle; }
+    void setLogo()                                      { this.logo = logo; }
+
+
+/*
     @Override
     public void writeToParcel(Parcel dest, int flags)
     {
@@ -79,9 +96,9 @@ public class Job implements Parcelable
         dest.writeByte(this.applied          ? (byte) 1 : (byte) 0);
         dest.writeByte(this.coolnessScore    ? (byte) 1 : (byte) 0);
         dest.writeByte(this.userNotes        ? (byte) 1 : (byte) 0);
-    }
+    }*/
 
-    protected Job(Parcel input)
+    /*protected Job(Parcel input)
     {
         this.appTitle           = input.readString();
         this.companyName        = input.readString();
@@ -90,12 +107,14 @@ public class Job implements Parcelable
         this.location           = input.readString();
         this.jobDescription     = input.readString();
         this.notes              = input.readString();
-        this.status             = input.readByte() != 0;
+
+//        this.status             = input.readByte() != 0;
         this.applied         = input.readByte() != 0;
         this.coolnessScore   = input.readByte() != 0;
         this.userNotes       = input.readByte() != 0;
-    }
+    }*/
 
+    /*
     @Override
     public int describeContents() {return 0;}
 
@@ -105,5 +124,5 @@ public class Job implements Parcelable
 
         @Override
         public Job[] newArray(int size) { return new Job[size];}
-    };
+    };*/
 }
