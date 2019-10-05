@@ -16,7 +16,6 @@ public class Job implements Serializable
     private String  coolScore;
     private String  notes;
 
-    private boolean status;
     private boolean applied;
     private boolean coolnessScore;
     private boolean userNotes;
@@ -61,7 +60,6 @@ public class Job implements Serializable
     public String   getAppTitle()       {return appTitle;}
     public String   getCoolScore()      {return coolScore;}
     public int      getLogo()           {return logo;}
-    public Boolean  getStatus()         {return status;}
 
 
 
@@ -70,7 +68,7 @@ public class Job implements Serializable
     void setJobTitle(String jobTitle)                   { this.jobTitle = jobTitle; }
     void setLocation(String location)                   { this.location = location; }
     public void setNotes(String notes)                  { this.notes = notes; }
-    public void setStatus(boolean applied)              { this.status = applied; }
+    public void setStatus(boolean applied)              { this.applied = applied; }
     public void setCoolScore(String coolScore)          { this.coolScore = coolScore; }
     public void setHasCoolnessScore(boolean hasCoolnessScore) { this.coolnessScore = hasCoolnessScore; }
     public void setHasUserNotes(boolean hasUserNotes)   { this.userNotes = hasUserNotes; }

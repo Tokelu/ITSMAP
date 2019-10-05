@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My Jobs</string>
+    <string name="EditTextDescription">Tätigkeitsbeschreibung</string>
+    <string name="TextViewDescription">Tätigkeitsbeschreibung</string>
+    <string name="setCoolnessScoreText">Geben Sie hier Ihren Coolness Score ein:</string>
+    <string name="saveBtn">Speichern</string>
+    <string name="jobStatusTextNotApplied">Nicht beworben</string>
+    <string name="jobStatusTextApplied">Beworben</string>
+    <string name="activityNotesCheckBox">Beworben</string>
+    <string name="activityListTextView">Meine Jobs</string>
+    <string name="TextViewStatusResult">Nicht beworben</string>
+    <string name="TextViewNotes">Aufzeichnungen</string>
+    <string name="TextViewLocation">Lage</string>
+    <string name="TextViewJobtitle">Berufsbezeichnung</string>
+    <string name="TextViewCompany">"Firmenname "</string>
+    <string name="OK_Button">OK</string>
+    <string name="ExitButton">Beenden</string>
+    <string name="EditTextNotes">Hier erscheinen Notizen:</string>
+    <string name="setNotesPrependText">Aufzeichnungen:</string>
+</resources>

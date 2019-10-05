@@ -121,6 +121,8 @@ public class NotesActivity extends AppCompatActivity
         appliedCheckBox = findViewById(R.id.activityNotesCheckBox);
         ok_Btn          = findViewById(R.id.activityNotesTextViewOKBtn);
         cancel_Btn      = findViewById(R.id.activityNotesTextViewCancelBtn);
+
+
     }
 
     private void updateIU(Job job)
@@ -138,7 +140,7 @@ public class NotesActivity extends AppCompatActivity
         }
         else
         {
-            coolScore.setText("Set your Coolness Score: ");
+            coolScore.setText(R.string.setCoolnessScoreText);
         }
 
         if (job.hasApplied())
@@ -148,7 +150,7 @@ public class NotesActivity extends AppCompatActivity
 
         if (job.hasUserNotes())
         {
-            notes.setText("Notes: ");
+            notes.setText(R.string.setNotesPrependText);
             notes.append(job.getNotes());
         }
         else

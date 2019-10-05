@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -68,7 +69,7 @@ public class JobActivity extends AppCompatActivity
         statusResult = findViewById(R.id.activityJobTextViewStatusResult);
         ok_Btn = findViewById(R.id.activityJobButton);
         coolnessScore = findViewById(R.id.activityJobTextViewScore);
-        //description.setMovementMethod(new ScrollingMovementMethod());
+        description.setMovementMethod(new ScrollingMovementMethod());
     }
 
     private void updateUI(Job job)
@@ -78,7 +79,7 @@ public class JobActivity extends AppCompatActivity
         companyName.setText(job.getCompanyName());
         location.setText(job.getLocation());
         description.setText(job.getJobDescription());
-        status.setText((job.getStatus()? "Applied" : "Not Applied"));
+        status.setText((job.hasApplied()? R.string.jobStatusTextApplied : R.string.jobStatusTextNotApplied));
         notes.setText(job.getNotes());
         logo.setImageDrawable(drawableGenerator.getDrawableByName(job));
         if (job.hasCoolnessScore())

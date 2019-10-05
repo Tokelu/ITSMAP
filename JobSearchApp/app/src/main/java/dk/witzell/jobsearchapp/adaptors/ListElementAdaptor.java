@@ -53,10 +53,9 @@ public class ListElementAdaptor extends RecyclerView.Adapter<ListElementAdaptor.
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i)
     {
         Job currentJob = jobList.get(i);
-        //viewHolder.txtViewCompanyName.setText(currentJob.getCompanyName());
-        //viewHolder.txtViewJobTitle.setText(currentJob.getJobTitle());
-        //ViewHolder.txtViewApplied.setText("NA");
-        //ViewHolder.txtViewApplied.setText(currentJob.hasApplied() ? "Applied" : "Not applied");
+        viewHolder.txtViewCompanyName.setText(currentJob.getCompanyName());
+        viewHolder.txtViewJobTitle.setText(currentJob.getJobTitle());
+        viewHolder.txtViewApplied.setText(currentJob.hasApplied() ? R.string.jobStatusTextApplied : R.string.jobStatusTextNotApplied);
         viewHolder.txtViewCoolScore.setText(currentJob.getCoolScore());
         viewHolder.imgViewLogo.setImageDrawable(drawableGenerator.getDrawableByName(currentJob));
     }
@@ -109,15 +108,13 @@ public class ListElementAdaptor extends RecyclerView.Adapter<ListElementAdaptor.
         {
             if(resultCode == Activity.RESULT_OK)
             {
-                Job updateJob = (Job) data.getSerializableExtra("key");               //Objects.requireNonNull(data.getExtras()).getParcelable("key");
+                Job updatedJob = (Job) data.getSerializableExtra("TEST");
+                //Job updatedJob = Objects.requireNonNull(data.getExtras()).getParcelable("TEST");
                 int dataToReplace = data.getIntExtra(ADAPTOR_POSITION, 0);
-                jobList.set(dataToReplace, updateJob);
+                jobList.set(dataToReplace, updatedJob);
                 notifyDataSetChanged();
             }
             if(resultCode == Activity.RESULT_CANCELED) {}
         }
     }
-
-
-
 }

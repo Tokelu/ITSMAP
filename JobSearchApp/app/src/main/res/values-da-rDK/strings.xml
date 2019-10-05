@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My Jobs</string>
+    <string name="EditTextNotes">Noter vises her:</string>
+    <string name="ExitButton">Afslut</string>
+    <string name="OK_Button">OK</string>
+    <string name="TextViewCompany">Firmanavn</string>
+    <string name="TextViewDescription">Jobbeskrivelse</string>
+    <string name="TextViewJobtitle">Job titel</string>
+    <string name="TextViewLocation">Lokation</string>
+    <string name="TextViewNotes">Noter</string>
+    <string name="EditTextDescription">Jobbeskrivelse</string>
+    <string name="TextViewStatusResult">Ikke ansøgt</string>
+    <string name="activityListTextView">Mine Jobs</string>
+    <string name="activityNotesCheckBox">Ansøgt</string>
+    <string name="saveBtn">Gem</string>
+    <string name="setCoolnessScoreText">Sæt din Coolness Score her:</string>
+    <string name="jobStatusTextApplied">Ansøgt</string>
+    <string name="jobStatusTextNotApplied">Ikke ansøgt</string>
+    <string name="setNotesPrependText">Noter:</string>
+</resources>
