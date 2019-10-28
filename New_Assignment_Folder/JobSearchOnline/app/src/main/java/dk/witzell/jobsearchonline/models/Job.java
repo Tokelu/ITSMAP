@@ -16,6 +16,7 @@ public class Job implements Serializable
     private String  coolScore;
     private String  notes;
 
+    private boolean favoriteMark;
     private boolean applied;
     private boolean coolnessScore;
     private boolean userNotes;
@@ -37,17 +38,6 @@ public class Job implements Serializable
     }
 
 
-//    public Job(String companyName, String jobTitle, String coolScore, String jobDescription, String location )
-//    {
-//        this.companyName    = companyName;
-//        this.jobDescription = jobDescription;
-//        this.jobTitle       = jobTitle;
-//        this.location       = location;
-//        this.coolScore      = coolScore;
-//
-//        this.statusResult   = "Not-Applied";
-//    }
-
 
     public String   getCompanyName()    {return companyName;}
     public String   getJobDescription() {return jobDescription;}
@@ -57,6 +47,7 @@ public class Job implements Serializable
     public boolean  hasCoolnessScore()  {return coolnessScore;}
     public boolean  hasUserNotes()      {return userNotes;}
     public boolean  hasApplied()        {return applied;}
+    public boolean  isFavoriteMarked()  {return favoriteMark;}
     public String   getAppTitle()       {return appTitle;}
     public String   getCoolScore()      {return coolScore;}
     public int      getLogo()           {return logo;}
@@ -69,6 +60,7 @@ public class Job implements Serializable
     void setLocation(String location)                   { this.location = location; }
     public void setNotes(String notes)                  { this.notes = notes; }
     public void setStatus(boolean applied)              { this.applied = applied; }
+    public void setFavoriteMarked(boolean favoriteMark) { this.favoriteMark = favoriteMark; }
     public void setCoolScore(String coolScore)          { this.coolScore = coolScore; }
     public void setHasCoolnessScore(boolean hasCoolnessScore) { this.coolnessScore = hasCoolnessScore; }
     public void setHasUserNotes(boolean hasUserNotes)   { this.userNotes = hasUserNotes; }
@@ -78,49 +70,4 @@ public class Job implements Serializable
     void setAppTitle(String appTitle)                   { this.appTitle = appTitle; }
     void setLogo()                                      { this.logo = logo; }
 
-
-/*
-    @Override
-    public void writeToParcel(Parcel dest, int flags)
-    {
-        dest.writeString(this.appTitle);
-        dest.writeString(this.companyName);
-        dest.writeString(this.jobTitle);
-        dest.writeString(this.coolScore);
-        dest.writeString(this.location);
-        dest.writeString(this.jobDescription);
-        dest.writeString(this.notes);
-        dest.writeByte(this.status              ? (byte) 1 : (byte) 0);
-        dest.writeByte(this.applied          ? (byte) 1 : (byte) 0);
-        dest.writeByte(this.coolnessScore    ? (byte) 1 : (byte) 0);
-        dest.writeByte(this.userNotes        ? (byte) 1 : (byte) 0);
-    }*/
-
-    /*protected Job(Parcel input)
-    {
-        this.appTitle           = input.readString();
-        this.companyName        = input.readString();
-        this.jobTitle           = input.readString();
-        this.coolScore          = input.readString();
-        this.location           = input.readString();
-        this.jobDescription     = input.readString();
-        this.notes              = input.readString();
-
-//        this.status             = input.readByte() != 0;
-        this.applied         = input.readByte() != 0;
-        this.coolnessScore   = input.readByte() != 0;
-        this.userNotes       = input.readByte() != 0;
-    }*/
-
-    /*
-    @Override
-    public int describeContents() {return 0;}
-
-    public static final Creator<Job> CREATOR = new Creator<Job>() {
-        @Override
-        public Job createFromParcel(Parcel parcel) { return new Job(parcel); }
-
-        @Override
-        public Job[] newArray(int size) { return new Job[size];}
-    };*/
 }

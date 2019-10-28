@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.util.Objects;
 import java.util.SplittableRandom;
+import java.util.TreeMap;
 
 import dk.witzell.jobsearchonline.adaptors.ListElementAdaptor;
 import dk.witzell.jobsearchonline.models.Job;
@@ -25,14 +27,15 @@ public class NotesActivity extends AppCompatActivity
     private SeekBar     seekBarRating;
     private EditText    notes;
     private Button      ok_Btn;
+    private CheckBox    favoriteStatus;
     private Button      cancel_Btn;
-
     private float       seekBarValue;
     private CheckBox    appliedCheckBox;
     private Job         clickedJob;
 
     private String      SEEKBAR_VALUE_KEY = "seekBarValue";
     private String      APPLIED_STATUS_KEY = "appliedStatus";
+    private String      FAVORITE_STATUS_KEY = "favoriteStatus";
     private String      NOTES_KEY = "notesText";
     private String      USER_COOLNESS_RATING_KEY = "userCoolnessRating";
     //private String      JOB_TITLE_KEY = "jobTitle";
@@ -52,7 +55,8 @@ public class NotesActivity extends AppCompatActivity
         if (savedInstanceState != null)
         {
             int oldSeekBarValue = savedInstanceState.getInt(SEEKBAR_VALUE_KEY);
-            boolean checkBox = savedInstanceState.getBoolean(APPLIED_STATUS_KEY);
+            boolean OldAppliedStatus = savedInstanceState.getBoolean(APPLIED_STATUS_KEY);
+            boolean oldFavoriteStatus = savedInstanceState.getBoolean(FAVORITE_STATUS_KEY);
             boolean hasCoolnessScore = savedInstanceState.getBoolean(USER_COOLNESS_RATING_KEY);
             String oldNotes = savedInstanceState.getString(NOTES_KEY);
             //String oldJobTitle = savedInstanceState.getString(JOB_TITLE_KEY);
@@ -60,7 +64,8 @@ public class NotesActivity extends AppCompatActivity
 
             clickedJob.setHasCoolnessScore(hasCoolnessScore);
             seekBarRating.setProgress(oldSeekBarValue);
-            appliedCheckBox.setChecked(checkBox);
+            appliedCheckBox.setChecked(OldAppliedStatus);
+            favoriteStatus.setChecked(oldFavoriteStatus);
             notes.setText(oldNotes);
             //jobTitle.setText(oldJobTitle);
             //companyName.setText(oldCompanyName);
@@ -79,6 +84,8 @@ public class NotesActivity extends AppCompatActivity
         {
             updateIU(Objects.requireNonNull(clickedJob));
         }
+
+
 
         ok_Btn.setOnClickListener(v -> {
             Job updatedJob = updateJobValues(clickedJob);
@@ -121,6 +128,7 @@ public class NotesActivity extends AppCompatActivity
         appliedCheckBox = findViewById(R.id.activityNotesCheckBox);
         ok_Btn          = findViewById(R.id.activityNotesTextViewOKBtn);
         cancel_Btn      = findViewById(R.id.activityNotesTextViewCancelBtn);
+        favoriteStatus  = findViewById(R.id.favoritedMark);
 
 
     }
@@ -148,9 +156,14 @@ public class NotesActivity extends AppCompatActivity
             appliedCheckBox.setChecked(true);
         }
 
+        if (job.isFavoriteMarked())
+        {
+            favoriteStatus.setChecked(true);
+        }
+
         if (job.hasUserNotes())
         {
-            notes.setText(R.string.setNotesPrependText);
+            //notes.setText(R.string.setNotesPrependText);
             notes.append(job.getNotes());
         }
         else
@@ -172,6 +185,14 @@ public class NotesActivity extends AppCompatActivity
         else
         {
             job.setStatus(false);
+        }
+        if (favoriteStatus.isChecked())
+        {
+            job.setFavoriteMarked(true);
+        }
+        else
+        {
+            job.setFavoriteMarked(false);
         }
         return job;
     }

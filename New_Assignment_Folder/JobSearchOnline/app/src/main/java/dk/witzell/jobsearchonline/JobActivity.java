@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ public class JobActivity extends AppCompatActivity
     private TextView    description;
     private TextView    notes;
     private TextView    status;
+    private CheckBox    favoriteMark;
     private TextView    coolnessScore;
 
     private Button      ok_Btn;
@@ -66,7 +68,8 @@ public class JobActivity extends AppCompatActivity
         description = findViewById(R.id.activityJobEditTextDescription);
         notes = findViewById(R.id.activityJobEditTextNotes);
         status = findViewById(R.id.activityJobTextViewStatus);
-        statusResult = findViewById(R.id.activityJobTextViewStatusResult);
+        favoriteMark = findViewById(R.id.favoritedMark);
+        //statusResult = findViewById(R.id.activityJobTextViewStatusResult);
         ok_Btn = findViewById(R.id.activityJobButton);
         coolnessScore = findViewById(R.id.activityJobTextViewScore);
         description.setMovementMethod(new ScrollingMovementMethod());
@@ -80,6 +83,7 @@ public class JobActivity extends AppCompatActivity
         location.setText(job.getLocation());
         description.setText(job.getJobDescription());
         status.setText((job.hasApplied()? R.string.jobStatusTextApplied : R.string.jobStatusTextNotApplied));
+        favoriteMark.setChecked(job.isFavoriteMarked() ? true : false);
         notes.setText(job.getNotes());
         logo.setImageDrawable(drawableGenerator.getDrawableByName(job));
         if (job.hasCoolnessScore())

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -56,6 +57,7 @@ public class ListElementAdaptor extends RecyclerView.Adapter<ListElementAdaptor.
         viewHolder.txtViewCompanyName.setText(currentJob.getCompanyName());
         viewHolder.txtViewJobTitle.setText(currentJob.getJobTitle());
         viewHolder.txtViewApplied.setText(currentJob.hasApplied() ? R.string.jobStatusTextApplied : R.string.jobStatusTextNotApplied);
+        viewHolder.favoriteMark.setChecked(currentJob.isFavoriteMarked() ? true : false );
         viewHolder.txtViewCoolScore.setText(currentJob.getCoolScore());
         viewHolder.imgViewLogo.setImageDrawable(drawableGenerator.getDrawableByName(currentJob));
     }
@@ -70,6 +72,7 @@ public class ListElementAdaptor extends RecyclerView.Adapter<ListElementAdaptor.
         TextView txtViewCoolScore;
         ImageView imgViewLogo;
         TextView txtViewApplied;
+        CheckBox favoriteMark;
 
         public ViewHolder(View itemView)
         {
@@ -79,6 +82,7 @@ public class ListElementAdaptor extends RecyclerView.Adapter<ListElementAdaptor.
             txtViewJobTitle = itemView.findViewById(R.id.jobListElementTextViewJobTitle);
             txtViewCoolScore = itemView.findViewById(R.id.jobListElementTextViewCoolnessScore);
             txtViewApplied = itemView.findViewById(R.id.jobListElementTextViewApplied);
+            favoriteMark = itemView.findViewById(R.id.favoritedMark);
             imgViewLogo = itemView.findViewById(R.id.jobListElementLogo);
 
             itemView.setOnClickListener(v ->
