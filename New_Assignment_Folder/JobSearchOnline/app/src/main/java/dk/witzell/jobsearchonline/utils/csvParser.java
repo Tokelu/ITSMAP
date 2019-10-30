@@ -15,7 +15,7 @@ import java.util.List;
 
 import dk.witzell.jobsearchonline.models.Job;
 
-
+/*
 public class csvParser
 {
     private InputStream inputStream;
@@ -52,3 +52,4 @@ public class csvParser
         return list;
     }
 }
+*/

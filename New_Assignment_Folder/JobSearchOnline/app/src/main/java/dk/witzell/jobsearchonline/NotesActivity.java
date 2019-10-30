@@ -8,13 +8,10 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.util.Objects;
-import java.util.SplittableRandom;
-import java.util.TreeMap;
 
 import dk.witzell.jobsearchonline.adaptors.ListElementAdaptor;
 import dk.witzell.jobsearchonline.models.Job;
@@ -136,13 +133,13 @@ public class NotesActivity extends AppCompatActivity
     private void updateIU(Job job)
     {
         companyName.setText(job.getCompanyName());
-        jobTitle.setText(job.getJobTitle());
+        jobTitle.setText(job.getTitle());
 
-        if (job.hasCoolnessScore())
+        if (job.getHasCoolnessScore())
         {
             //coolScore.setText("Coolness Score: ");
-            coolScore.setText(job.getCoolScore());
-            float coolnessScore = Float.valueOf(job.getCoolScore());
+            coolScore.setText(job.getcoolnessScore());
+            float coolnessScore = Float.valueOf(job.getcoolnessScore());
             seekBarRating.setProgress(Math.round(coolnessScore * 10));
             seekBarValue = ((float) seekBarRating.getProgress() / 10);
         }
@@ -151,17 +148,17 @@ public class NotesActivity extends AppCompatActivity
             coolScore.setText(R.string.setCoolnessScoreText);
         }
 
-        if (job.hasApplied())
+        if (job.getHasApplied())
         {
             appliedCheckBox.setChecked(true);
         }
 
-        if (job.isFavoriteMarked())
+        if (job.getIsFavoriteMarked())
         {
             favoriteStatus.setChecked(true);
         }
 
-        if (job.hasUserNotes())
+        if (job.getHasUserNotes())
         {
             //notes.setText(R.string.setNotesPrependText);
             notes.append(job.getNotes());
@@ -174,25 +171,25 @@ public class NotesActivity extends AppCompatActivity
 
     private Job updateJobValues(Job job)
     {
-        job.setCoolScore(String.valueOf(seekBarValue));
+        job.setCoolnessScore(String.valueOf(seekBarValue));
         job.setHasCoolnessScore(true);
         job.setNotes(notes.getText().toString());
         job.setHasUserNotes(true);
         if (appliedCheckBox.isChecked())
         {
-            job.setStatus(true);
+            job.setHasApplied(true);
         }
         else
         {
-            job.setStatus(false);
+            job.setHasApplied(false);
         }
         if (favoriteStatus.isChecked())
         {
-            job.setFavoriteMarked(true);
+            job.setIsFavoriteMarked(true);
         }
         else
         {
-            job.setFavoriteMarked(false);
+            job.setIsFavoriteMarked(false);
         }
         return job;
     }

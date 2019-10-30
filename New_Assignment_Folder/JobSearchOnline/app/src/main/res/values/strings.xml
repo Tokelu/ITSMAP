@@ -29,4 +29,5 @@
     <string name="btnRemove">Remove</string>
     <string name="coolnessScore">Coolness Score:</string>
     <string name="contentDescriptionImageBtn">Favorited</string>
+    <string name="broadcastRXNotificationString">com.ex.NOTIFY</string>
 </resources>

@@ -9,33 +9,31 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.view.View;
 
 import java.util.Objects;
 
 import dk.witzell.jobsearchonline.adaptors.ListElementAdaptor;
 import dk.witzell.jobsearchonline.models.Job;
 import dk.witzell.jobsearchonline.utils.DrawableGenerator;
+import dk.witzell.jobsearchonline.rooms.JobApp;
 
 public class JobActivity extends AppCompatActivity
 {
-    private ImageView   logo;
-    private TextView    companyName;
-    private TextView    jobTitle;
-    private TextView    location;
-    private TextView    description;
-    private TextView    notes;
-    private TextView    status;
-    private CheckBox    favoriteMark;
-    private TextView    coolnessScore;
-
-    private Button      ok_Btn;
-
-    private DrawableGenerator drawableGenerator;
-
-    private TextView    statusResult;
-
-    private Job         clickedJob;
-    private String JOB_OBJECT_KEY = "Job";
+    private ImageView           logo;
+    private TextView            companyName;
+    private TextView            jobTitle;
+    private TextView            location;
+    private TextView            description;
+    private TextView            notes;
+    private TextView            status;
+    private TextView            coolnessScore;
+    private CheckBox            favoriteMark;
+    private Button              ok_Btn, remove_Btn;
+    private DrawableGenerator   drawableGenerator;
+    //private TextView          statusResult;
+    private Job                 clickedJob;
+    private String              JOB_OBJECT_KEY = "Job";
 
 
     @Override
@@ -56,6 +54,16 @@ public class JobActivity extends AppCompatActivity
             updateUI(Objects.requireNonNull(clickedJob));
         }
         ok_Btn.setOnClickListener(v -> finish());
+
+        remove_Btn.setOnClickListener(v ->
+        {
+            deleteJobFromDatabase(clickedJob);
+            finish();
+        });
+    }
+
+    private void deleteJobFromDatabase(Job job){
+        ((JobApp) getApplicationContext()).getJobDb().JobDbDAO().delete(job);
     }
 
 
@@ -70,7 +78,7 @@ public class JobActivity extends AppCompatActivity
         status = findViewById(R.id.activityJobTextViewStatus);
         favoriteMark = findViewById(R.id.favoritedMark);
         //statusResult = findViewById(R.id.activityJobTextViewStatusResult);
-        ok_Btn = findViewById(R.id.activityJobButton);
+        ok_Btn = findViewById(R.id.activityJobButtonOK);
         coolnessScore = findViewById(R.id.activityJobTextViewScore);
         description.setMovementMethod(new ScrollingMovementMethod());
     }
@@ -78,17 +86,17 @@ public class JobActivity extends AppCompatActivity
     private void updateUI(Job job)
     {
         //this.setTitle(job.getCompanyName());
-        jobTitle.setText(job.getJobTitle());
+        jobTitle.setText(job.getTitle());
         companyName.setText(job.getCompanyName());
         location.setText(job.getLocation());
-        description.setText(job.getJobDescription());
-        status.setText((job.hasApplied()? R.string.jobStatusTextApplied : R.string.jobStatusTextNotApplied));
-        favoriteMark.setChecked(job.isFavoriteMarked() ? true : false);
+        description.setText(job.getDescription());
+        status.setText((job.getHasApplied()? R.string.jobStatusTextApplied : R.string.jobStatusTextNotApplied));
+        favoriteMark.setChecked(job.getIsFavoriteMarked() ? true : false);
         notes.setText(job.getNotes());
         logo.setImageDrawable(drawableGenerator.getDrawableByName(job));
-        if (job.hasCoolnessScore())
+        if (job.getHasCoolnessScore())
         {
-            coolnessScore.setText(job.getCoolScore());
+            coolnessScore.setText(job.getcoolnessScore());
         }
         else
         {

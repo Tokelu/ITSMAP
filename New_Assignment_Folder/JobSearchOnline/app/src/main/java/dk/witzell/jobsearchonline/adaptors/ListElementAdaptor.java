@@ -22,6 +22,7 @@ import dk.witzell.jobsearchonline.NotesActivity;
 import dk.witzell.jobsearchonline.R;
 import dk.witzell.jobsearchonline.models.Job;
 import dk.witzell.jobsearchonline.utils.DrawableGenerator;
+import com.squareup.picasso.Picasso;
 
 public class ListElementAdaptor extends RecyclerView.Adapter<ListElementAdaptor.ViewHolder>
 {
@@ -55,11 +56,16 @@ public class ListElementAdaptor extends RecyclerView.Adapter<ListElementAdaptor.
     {
         Job currentJob = jobList.get(i);
         viewHolder.txtViewCompanyName.setText(currentJob.getCompanyName());
-        viewHolder.txtViewJobTitle.setText(currentJob.getJobTitle());
-        viewHolder.txtViewApplied.setText(currentJob.hasApplied() ? R.string.jobStatusTextApplied : R.string.jobStatusTextNotApplied);
-        viewHolder.favoriteMark.setChecked(currentJob.isFavoriteMarked() ? true : false );
-        viewHolder.txtViewCoolScore.setText(currentJob.getCoolScore());
+        viewHolder.txtViewJobTitle.setText(currentJob.getTitle());
+        viewHolder.txtViewApplied.setText(currentJob.getHasApplied() ? R.string.jobStatusTextApplied : R.string.jobStatusTextNotApplied);
+        viewHolder.favoriteMark.setChecked(currentJob.getIsFavoriteMarked() ? true : false );
+        viewHolder.txtViewCoolScore.setText(currentJob.getcoolnessScore());
         viewHolder.imgViewLogo.setImageDrawable(drawableGenerator.getDrawableByName(currentJob));
+
+        // TODO: Load Logo image into each currentJob object.
+        //Picasso.with(context).load(currentJob.getLogo()).into(ViewHolder.imgViewLogo);
+
+
     }
 
     @Override
@@ -70,9 +76,9 @@ public class ListElementAdaptor extends RecyclerView.Adapter<ListElementAdaptor.
         TextView txtViewCompanyName;
         TextView txtViewJobTitle;
         TextView txtViewCoolScore;
-        ImageView imgViewLogo;
         TextView txtViewApplied;
         CheckBox favoriteMark;
+        ImageView imgViewLogo;
 
         public ViewHolder(View itemView)
         {
@@ -82,8 +88,8 @@ public class ListElementAdaptor extends RecyclerView.Adapter<ListElementAdaptor.
             txtViewJobTitle = itemView.findViewById(R.id.jobListElementTextViewJobTitle);
             txtViewCoolScore = itemView.findViewById(R.id.jobListElementTextViewCoolnessScore);
             txtViewApplied = itemView.findViewById(R.id.jobListElementTextViewApplied);
-            favoriteMark = itemView.findViewById(R.id.favoritedMark);
             imgViewLogo = itemView.findViewById(R.id.jobListElementLogo);
+            favoriteMark = itemView.findViewById(R.id.favoritedMark);
 
             itemView.setOnClickListener(v ->
             {
@@ -113,7 +119,6 @@ public class ListElementAdaptor extends RecyclerView.Adapter<ListElementAdaptor.
             if(resultCode == Activity.RESULT_OK)
             {
                 Job updatedJob = (Job) data.getSerializableExtra("TEST");
-                //Job updatedJob = Objects.requireNonNull(data.getExtras()).getParcelable("TEST");
                 int dataToReplace = data.getIntExtra(ADAPTOR_POSITION, 0);
                 jobList.set(dataToReplace, updatedJob);
                 notifyDataSetChanged();

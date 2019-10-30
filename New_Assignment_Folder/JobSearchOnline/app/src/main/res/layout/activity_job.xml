@@ -200,7 +200,7 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/activityJobButton"
+                android:id="@+id/activityJobButtonOK"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
@@ -218,12 +218,12 @@
                 android:layout_marginBottom="8dp"
                 android:text="@string/TextViewStatus"
                 android:textColor="@color/colorText"
-                app:layout_constraintBottom_toTopOf="@+id/activityJobButton"
+                app:layout_constraintBottom_toTopOf="@+id/activityJobButtonOK"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/activityJobButtonRemove"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"

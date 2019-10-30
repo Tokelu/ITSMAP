@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -22,12 +23,21 @@ import java.util.List;
 
 import dk.witzell.jobsearchonline.adaptors.ListElementAdaptor;
 import dk.witzell.jobsearchonline.models.Job;
-import dk.witzell.jobsearchonline.utils.csvParser;
+//import dk.witzell.jobsearchonline.utils.csvParser;
 
 
 public class ListActivity extends AppCompatActivity {
+    private static final String TAG = "LIST_ACTIVITY";
     private ListElementAdaptor listElementAdaptor;
     private List<Job> jobsList;
+    private RecyclerView recyclerView;
+    private static final String URL_DATA = "https://jobs.github.com/positions.json";
+    private final int jsonKey = 1;
+    private static ProgressDialog progressDialog;
+    boolean isBound = false;
+    boolean ActivityBeforeBinding = false;
+    int position;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -55,12 +65,13 @@ public class ListActivity extends AppCompatActivity {
 
         btnExit.setOnClickListener(v -> finish());
     }
-
+/*
     private List csvReader() {
         InputStream stream = getResources().openRawResource(R.raw.jobs);
         csvParser parser = new csvParser(stream);
         return parser.getAssets();
     }
+    */
 
     private List<Job> getJobObjects(List<Job> fileData)
     {
@@ -79,8 +90,8 @@ public class ListActivity extends AppCompatActivity {
         {
             job.setHasUserNotes(false);     //job.setNotes("");
             job.setHasCoolnessScore(false); //job.setCoolScore("NA");
-            job.setStatus(false);
-            job.setCoolScore(job.getCoolScore());
+            job.setHasApplied(false);
+            job.setCoolnessScore(job.getcoolnessScore());
         }
         return jobList;
     }

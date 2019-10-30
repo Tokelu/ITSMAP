@@ -227,7 +227,7 @@
                     android:layout_height="match_parent">
 
                     <Button
-                        android:id="@+id/button2"
+                        android:id="@+id/activityJobButtonRemove"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"
@@ -239,14 +239,14 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <Button
-                        android:id="@+id/activityJobButton"
+                        android:id="@+id/activityJobButtonOK"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="32dp"
                         android:text="@android:string/ok"
-                        app:layout_constraintBottom_toBottomOf="@+id/button2"
+                        app:layout_constraintBottom_toBottomOf="@+id/activityJobButtonRemove"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/button2" />
+                        app:layout_constraintTop_toTopOf="@+id/activityJobButtonRemove" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
