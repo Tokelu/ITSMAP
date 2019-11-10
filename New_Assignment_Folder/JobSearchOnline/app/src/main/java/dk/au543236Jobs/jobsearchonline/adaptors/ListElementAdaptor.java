@@ -1,9 +1,6 @@
-package dk.witzell.jobsearchonline.adaptors;
+package dk.au543236Jobs.jobsearchonline.adaptors;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-import java.util.Objects;
 
-import dk.witzell.jobsearchonline.JobActivity;
-import dk.witzell.jobsearchonline.NotesActivity;
-import dk.witzell.jobsearchonline.R;
-import dk.witzell.jobsearchonline.models.Job;
-import dk.witzell.jobsearchonline.utils.DrawableGenerator;
+import dk.au543236Jobs.jobsearchonline.R;
+import dk.au543236Jobs.jobsearchonline.models.Job;
+
 import com.squareup.picasso.Picasso;
 
 

@@ -1,4 +1,4 @@
-package dk.witzell.jobsearchonline.rooms;
+package dk.au543236Jobs.jobsearchonline.rooms;
 
 
 import android.content.Context;
@@ -6,12 +6,11 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
-import androidx.room.TypeConverters;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import dk.witzell.jobsearchonline.dao.JobDbDAO;
-import dk.witzell.jobsearchonline.models.Job;
+import dk.au543236Jobs.jobsearchonline.dao.JobDbDAO;
+import dk.au543236Jobs.jobsearchonline.models.Job;
 
 import static androidx.room.Room.databaseBuilder;
 

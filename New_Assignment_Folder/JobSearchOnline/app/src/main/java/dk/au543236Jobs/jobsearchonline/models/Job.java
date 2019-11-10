@@ -1,4 +1,4 @@
-package dk.witzell.jobsearchonline.models;
+package dk.au543236Jobs.jobsearchonline.models;
 
 
 
@@ -8,9 +8,6 @@ import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.Serializable;
 

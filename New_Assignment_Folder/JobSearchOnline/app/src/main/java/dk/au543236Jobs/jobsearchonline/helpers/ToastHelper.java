@@ -1,11 +1,11 @@
-package dk.witzell.jobsearchonline.helpers;
+package dk.au543236Jobs.jobsearchonline.helpers;
 
 import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import dk.witzell.jobsearchonline.R;
+import dk.au543236Jobs.jobsearchonline.R;
 
 public class ToastHelper {
 

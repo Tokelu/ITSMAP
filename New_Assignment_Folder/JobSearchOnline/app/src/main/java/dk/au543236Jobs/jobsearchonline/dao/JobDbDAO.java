@@ -1,4 +1,4 @@
-package dk.witzell.jobsearchonline.dao;
+package dk.au543236Jobs.jobsearchonline.dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -8,7 +8,7 @@ import androidx.room.Update;
 import static androidx.room.OnConflictStrategy.REPLACE;
 import java.util.List;
 
-import dk.witzell.jobsearchonline.models.Job;
+import dk.au543236Jobs.jobsearchonline.models.Job;
 
 
 
