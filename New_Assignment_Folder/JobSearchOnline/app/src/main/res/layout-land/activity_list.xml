@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline24" />
 
     <Button
-        android:id="@+id/activityListButton"
+        android:id="@+id/activityListButtonExit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -72,17 +72,17 @@
         app:layout_constraintGuide_end="16dp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/activityListButtonUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="@string/btnTextUpdate"
-        app:layout_constraintBottom_toTopOf="@+id/activityListButton"
+        app:layout_constraintBottom_toTopOf="@+id/activityListButtonExit"
         app:layout_constraintEnd_toStartOf="@+id/guideline23"
         app:layout_constraintStart_toStartOf="@+id/guideline9" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/activityListTextViewSearchField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -100,7 +100,7 @@
         android:layout_marginBottom="32dp"
         android:hint="@string/searchBar"
         android:text="@string/searchBarText"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/activityListButtonUpdate"
         app:layout_constraintEnd_toStartOf="@+id/guideline23"
         app:layout_constraintStart_toStartOf="@+id/guideline9" />
 

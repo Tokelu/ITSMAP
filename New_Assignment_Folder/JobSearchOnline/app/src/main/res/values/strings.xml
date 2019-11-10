@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Jobs</string>
+    <string name="app_name">au543236 Jobs</string>
 
     <string name="activityListTextView">My Jobs</string>
     <string name="ExitButton">Exit</string>
@@ -30,4 +30,24 @@
     <string name="coolnessScore">Coolness Score:</string>
     <string name="contentDescriptionImageBtn">Favorited</string>
     <string name="broadcastRXNotificationString">com.ex.NOTIFY</string>
+    <string name="jobNotificationText">JOB NOTIFICATION</string>
+    <string name="jobsNotFound">No jobs found</string>
+    <string name="noNetworkConnection">No internet connection</string>
+    <string name="jobServiceChannel">Job service Channel</string>
+    <string name="notificationTitle">Job service is running</string>
+    <string name="notificationText">Check back later for jobs</string>
+    <string name="jobRmFavouriteAndList">Job removed Favourites and from List</string>
+    <string name="jobRmFromList">Job removed from List</string>
+    <string name="jobUpdated">Job has been Updated</string>
+    <string name="jobRmFromFavourites">Job has been removef From Favourites</string>
+    <string name="tempSaved">Job has been temporily saved</string>
+    <string name="jobAddedToFavourites">Job added to Favourites</string>
+    <string name="searchForJob">Job Search:</string>
+    <string name="searchingForJobs">Searching for matching jobs</string>
+    <string name="searchingForJobsNoString">Searching for jobs</string>
+    <string name="jobListSaved">Job list saved</string>
+    <string name="jobSaved">Job saved</string>
+
+
+
 </resources>

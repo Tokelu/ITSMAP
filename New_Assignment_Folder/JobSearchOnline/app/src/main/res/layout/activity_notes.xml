@@ -195,7 +195,7 @@
                 app:layout_constraintGuide_percent="0.5" />
 
             <Button
-                android:id="@+id/activityNotesTextViewOKBtn"
+                android:id="@+id/activityNotesTextViewSaveBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dk.witzell.jobsearchonline">
+    package="dk.au543236Jobs.jobsearchonline">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
@@ -10,9 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NotesActivity"></activity>
-        <activity android:name=".JobActivity" />
-        <activity android:name=".ListActivity">
+        <activity android:name="dk.au543236Jobs.jobsearchonline.NotesActivity"></activity>
+        <activity android:name="dk.au543236Jobs.jobsearchonline.JobActivity" />
+        <activity android:name="dk.au543236Jobs.jobsearchonline.ListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
