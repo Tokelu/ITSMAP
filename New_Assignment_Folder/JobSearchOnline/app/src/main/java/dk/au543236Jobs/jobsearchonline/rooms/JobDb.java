@@ -14,7 +14,6 @@ import dk.au543236Jobs.jobsearchonline.models.Job;
 
 import static androidx.room.Room.databaseBuilder;
 
-/*TODO    ##################### THIS IS DONE ######################################*/
 
 
 @Database(entities={Job.class}, version = 4, exportSchema = false)
@@ -25,9 +24,10 @@ public abstract class JobDb extends RoomDatabase {
     private static JobDb jobDb;
 
     public static JobDb getJobDb(Context context) {
-        if (jobDb == null) { jobDb = databaseBuilder(context.getApplicationContext(),JobDb.class, "Jobdata").addMigrations(MIGRATION_3_4).build(); } return jobDb;
+        if (jobDb == null) { jobDb = databaseBuilder(context.getApplicationContext(), JobDb.class, "JobDb").addMigrations(MIGRATION_3_4).build(); } return jobDb;
     }
 
+        //https://developer.android.com/training/data-storage/room/migrating-db-versions
     static final Migration MIGRATION_3_4 = new Migration(3, 4) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) { database.execSQL("ALTER TABLE JOB ADD COLUMN isFavourite INTEGER NOT NULL DEFAULT 0"); }

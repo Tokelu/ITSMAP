@@ -8,7 +8,7 @@
     tools:context=".ListActivity">
 
     <TextView
-        android:id="@+id/activityListTextView"
+        android:id="@+id/activityListTextViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -82,17 +82,17 @@
         app:layout_constraintStart_toStartOf="@+id/guideline9" />
 
     <TextView
-        android:id="@+id/activityListTextViewSearchField"
+        android:id="@+id/activityListTextViewSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="@android:string/search_go"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintBottom_toTopOf="@+id/activityListTextViewSearchString"
         app:layout_constraintEnd_toStartOf="@+id/guideline23"
         app:layout_constraintStart_toEndOf="@+id/activityListRecyclerView" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/activityListTextViewSearchString"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

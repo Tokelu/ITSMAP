@@ -19,9 +19,8 @@ import com.squareup.picasso.Picasso;
 
 import dk.au543236Jobs.jobsearchonline.Services.AsyncJobService;
 import dk.au543236Jobs.jobsearchonline.models.Job;
-import dk.au543236Jobs.jobsearchonline.utils.DrawableGenerator;
+//import dk.au543236Jobs.jobsearchonline.utils.DrawableGenerator;
 //import dk.witzell.jobsearchonline.rooms.JobApp;
-/*TODO    ##################### THIS IS DONE ######################################*/
 
 public class JobActivity extends AppCompatActivity
 {
@@ -31,11 +30,11 @@ public class JobActivity extends AppCompatActivity
     private TextView            location;
     private TextView            description;
     private TextView            notes;
-    private TextView            status;
+    private TextView appliedMark;
     private TextView            coolnessScore;
     private CheckBox            favoriteMark;
     private Button              ok_Btn, remove_Btn;
-    private DrawableGenerator   drawableGenerator;
+//    private DrawableGenerator   drawableGenerator;
     //private TextView          statusResult;
     private Job                 clickedJob;
     private String              JOB_OBJECT_KEY = "Job";
@@ -48,25 +47,12 @@ public class JobActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job);
-        drawableGenerator = new DrawableGenerator(this);
         if (savedInstanceState != null)
         {
-            clickedJob = (Job) savedInstanceState.getSerializable(JOB_OBJECT_KEY);
-//            updateUI(Objects.requireNonNull(clickedJob));
+            clickedJob = savedInstanceState.getParcelable(JOB_OBJECT_KEY);
         }
         initializeUI();
-//        else
-//        {
-//            clickedJob = (Job) Objects.requireNonNull(getIntent().getExtras()).getSerializable(ListElementAdaptor.JOB_FROM_ADAPTOR);
-//            updateUI(Objects.requireNonNull(clickedJob));
-//        }
-
     }
-/*
-    private void deleteJobFromDatabase(Job job){
-        ((JobApp) getApplicationContext()).getJobDb().JobDbDAO().delete(job);
-    }
-*/
 
     private void initializeUI()
     {
@@ -76,7 +62,7 @@ public class JobActivity extends AppCompatActivity
         logo            = findViewById(R.id.activityJobImageView);
         description     = findViewById(R.id.activityJobEditTextDescription);
         notes           = findViewById(R.id.activityJobEditTextNotes);
-        status          = findViewById(R.id.activityJobTextViewStatus);
+        appliedMark = findViewById(R.id.activityJobTextViewStatus);
         favoriteMark    = findViewById(R.id.favoritedMark);
         //statusResult  = findViewById(R.id.activityJobTextViewStatusResult);
         ok_Btn          = findViewById(R.id.activityJobButtonOK);
@@ -90,7 +76,6 @@ public class JobActivity extends AppCompatActivity
             if (isBound) {
                 jobService.removeJob(clickedJob);
             }
-//            deleteJobFromDatabase(clickedJob);
             finish();
         });
 
@@ -104,17 +89,17 @@ public class JobActivity extends AppCompatActivity
         companyName.setText(job.getCompanyName());
         location.setText(job.getLocation());
         description.setText(job.getDescription());
-        status.setText((job.getHasApplied()? R.string.jobStatusTextApplied : R.string.jobStatusTextNotApplied));
-        favoriteMark.setChecked(job.getIsFavoriteMarked() ? true : false);
+        appliedMark.setText((job.getIsMarkedApplied()? R.string.jobStatusTextApplied : R.string.jobStatusTextNotApplied));
+        favoriteMark.setChecked(job.getIsFavoriteMarked());
         notes.setText(job.getNotes());
         Picasso.with(this).load(clickedJob.getCompanyLogo()).into(logo);
         if (job.getHasCoolnessScore())
         {
-            coolnessScore.setText(job.getcoolnessScore());
+            coolnessScore.setText(job.getCoolnessScore());
         }
         else
         {
-            coolnessScore.setText("-");
+            coolnessScore.setText("-.-");
         }
     }
 
@@ -122,7 +107,7 @@ public class JobActivity extends AppCompatActivity
     public void onSaveInstanceState(@NonNull Bundle savedInstanceState)
     {
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putSerializable(JOB_OBJECT_KEY, clickedJob);
+        savedInstanceState.putParcelable(JOB_OBJECT_KEY, clickedJob);
     }
 
     private ServiceConnection jobServiceConnection = new ServiceConnection() {
@@ -158,6 +143,4 @@ public class JobActivity extends AppCompatActivity
             unbindService(jobServiceConnection);
         }
     }
-
-
 }

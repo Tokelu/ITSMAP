@@ -18,7 +18,6 @@ public class UpdateJobTask extends AsyncTask<Job, Void, Void> {
 
     @Override
     protected Void doInBackground(Job... job) {
-        // MyJobService myJobService = jobServiceWeakReference.get();
         JobDb.getJobDb(jobServiceWeakReference.get()).JobDbDAO().updateJob(job[0]);
         return null;
     }

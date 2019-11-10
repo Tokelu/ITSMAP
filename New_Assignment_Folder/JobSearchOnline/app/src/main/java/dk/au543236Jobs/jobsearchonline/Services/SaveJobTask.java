@@ -20,7 +20,10 @@ public class SaveJobTask extends AsyncTask<Job, Void, Void> {
     protected Void doInBackground(Job... jobData) {
         AsyncJobService jobService = jobServiceWeakReference.get();
         JobDb.getJobDb(jobService).JobDbDAO().addJob(jobData[0]);
-//        AsyncJobService.getFavouriteJobsList().add(jobData[0])
+
+//        TODO    this gives an error: Cannot be referenced from non-static context
+//        AsyncJobService.getFavouriteJobsList().add(jobData[0]);
+
         return null;
     }
 }

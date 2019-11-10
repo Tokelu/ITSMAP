@@ -8,7 +8,6 @@ import java.util.List;
 import dk.au543236Jobs.jobsearchonline.models.Job;
 import dk.au543236Jobs.jobsearchonline.rooms.JobDb;
 
-/*TODO    ##################### THIS IS DONE ######################################*/
 
 
 public class GetJobListTask extends AsyncTask<Void,Void, List<Job>> {

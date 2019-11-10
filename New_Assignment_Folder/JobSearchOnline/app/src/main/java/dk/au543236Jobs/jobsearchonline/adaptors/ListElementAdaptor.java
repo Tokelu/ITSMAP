@@ -18,34 +18,21 @@ import dk.au543236Jobs.jobsearchonline.models.Job;
 
 import com.squareup.picasso.Picasso;
 
-
-
-public class ListElementAdaptor extends RecyclerView.Adapter<ListElementAdaptor.ViewHolder>
-{
+public class ListElementAdaptor extends RecyclerView.Adapter<ListElementAdaptor.ViewHolder>{
     private List<Job> jobList;
     private Context context;
     private OnClickedJobListener onClickedJobListener;
     public static String JOB_FROM_ADAPTOR = "Adaptor Job";
     private ImageView companyLogo;
 
-    //    public static final String ADAPTOR_POSITION = "Adaptor Position";
-    //    private static final Integer JOB_FROM_ADAPTOR_CODE = 100;
-    //    private DrawableGenerator drawableGenerator;
-
-
-
-
-    public ListElementAdaptor(List<Job> jobs, OnClickedJobListener onClickedJobListener)
-    {
+    public ListElementAdaptor(List<Job> jobs, OnClickedJobListener onClickedJobListener) {
         jobList = jobs;
         this.onClickedJobListener = onClickedJobListener;
-//        drawableGenerator = new DrawableGenerator(context);
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i)
-    {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         context = parent.getContext();
         View listView = LayoutInflater.from(context).inflate(R.layout.job_list_element, parent,false);
         return new ViewHolder(listView, onClickedJobListener );
@@ -56,11 +43,10 @@ public class ListElementAdaptor extends RecyclerView.Adapter<ListElementAdaptor.
         Job currentJob = jobList.get(i);
         viewHolder.txtViewCompanyName.setText(currentJob.getCompanyName());
         viewHolder.txtViewJobTitle.setText(currentJob.getTitle());
-        viewHolder.txtViewApplied.setText(currentJob.getHasApplied() ? R.string.jobStatusTextApplied : R.string.jobStatusTextNotApplied);
-        viewHolder.favoriteMark.setChecked(currentJob.getIsFavoriteMarked() ? true : false );
-        viewHolder.txtViewCoolScore.setText(currentJob.getHasCoolnessScore() ? currentJob.getcoolnessScore() : "-.-");
+        viewHolder.txtViewApplied.setText(currentJob.getIsMarkedApplied() ? R.string.jobStatusTextApplied : R.string.jobStatusTextNotApplied);
+        viewHolder.favoriteMark.setChecked(currentJob.getIsFavoriteMarked());
+        viewHolder.txtViewCoolScore.setText(currentJob.getHasCoolnessScore() ? currentJob.getCoolnessScore() : "-.-");
         Picasso.with(context).load(currentJob.getCompanyLogo()).into(companyLogo);
-//        viewHolder.imgViewLogo.setImageDrawable(drawableGenerator.getDrawableByName(currentJob));
     }
 
     @Override
@@ -90,28 +76,6 @@ public class ListElementAdaptor extends RecyclerView.Adapter<ListElementAdaptor.
 
             view.setOnClickListener(this);
             view.setOnLongClickListener(this);
-
-            /*
-
-            itemView.setOnClickListener(v ->
-            {
-                Job clickedJob = jobList.get(getAdapterPosition());
-                Intent detailsIntent = new Intent(context, JobActivity.class);
-                detailsIntent.putExtra(JOB_FROM_ADAPTOR, clickedJob);
-                context.startActivity(detailsIntent);
-            });
-
-            itemView.setOnLongClickListener( v ->
-            {
-                Job clickedJob = jobList.get(getAdapterPosition());
-                Intent detailsIntent = new Intent(context, NotesActivity.class);
-                detailsIntent.putExtra(JOB_FROM_ADAPTOR, clickedJob);
-                detailsIntent.putExtra(ADAPTOR_POSITION, getAdapterPosition());
-                ((Activity) context).startActivityForResult(detailsIntent, JOB_FROM_ADAPTOR_CODE);
-                return true;
-            });
-
-             */
         }
 
         @Override
@@ -131,22 +95,4 @@ public class ListElementAdaptor extends RecyclerView.Adapter<ListElementAdaptor.
         void onClickedJob(int position);
         void onLongClickedJob(int position);
     }
-/*
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        Log.d("ListElementAdaptor", "onActivityResult");
-        if(requestCode == JOB_FROM_ADAPTOR_CODE)
-        {
-            if(resultCode == Activity.RESULT_OK)
-            {
-                Job updatedJob = (Job) data.getSerializableExtra("TEST");
-                int dataToReplace = data.getIntExtra(ADAPTOR_POSITION, 0);
-                jobList.set(dataToReplace, updatedJob);
-                notifyDataSetChanged();
-            }
-            if(resultCode == Activity.RESULT_CANCELED) {}
-        }
-    }
-
- */
 }

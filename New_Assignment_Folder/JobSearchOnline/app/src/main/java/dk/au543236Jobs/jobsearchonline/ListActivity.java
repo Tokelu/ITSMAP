@@ -19,6 +19,7 @@ import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -33,77 +34,54 @@ import dk.au543236Jobs.jobsearchonline.models.Job;
 
 public class ListActivity extends AppCompatActivity implements ListElementAdaptor.OnClickedJobListener{
     private static final String TAG = "LIST_ACTIVITY";
-    private List<Job> jobsList;
+    private List<Job> jobsList = new ArrayList<>();
     private RecyclerView recyclerView;
     boolean isBound = false;
-    private TextView searchStringInput;
+    private EditText searchStringInput;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter listElementAdaptor;
     private AsyncJobService jobService;
-    private Button btnRemove;
+    private Button btnUpdate;
     private Button btnExit;
     private static final int requestCodeNotes = 1;
 
-//    private ListElementAdaptor listElementAdaptor;
-//    private static final String URL_DATA = "https://jobs.github.com/positions.json";
-//    private final int jsonKey = 1;
-//    private static ProgressDialog progressDialog;
-//    boolean ActivityBeforeBinding = false;
-//    int position;
-//    private EditText searchStringInput;
 
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle saveState) {
         super.onSaveInstanceState(saveState);
-        saveState.putSerializable(getString(R.string.jobListSaved),(ArrayList) jobsList);
+        saveState.putParcelableArrayList(getString(R.string.jobListSaved),(ArrayList) jobsList);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        Log.d(TAG, "onCreate: Now in onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
         if (!AsyncJobService.isRunning) {
+            Log.d(TAG, "onCreate: No job running ");
             Intent intent = new Intent(this, AsyncJobService.class);
             ContextCompat.startForegroundService(this,intent);
         }
         if (savedInstanceState != null) {
-            jobsList = (ArrayList<Job>) savedInstanceState.getSerializable(ListElementAdaptor.JOB_FROM_ADAPTOR);
+            Log.d(TAG, "onCreate: Job running ");
+            jobsList = savedInstanceState.getParcelable(getString(R.string.jobListSaved));
         }
 
 
+        searchStringInput = findViewById(R.id.activityListTextViewSearchString);
         recyclerView = findViewById(R.id.activityListRecyclerView);
-        searchStringInput = findViewById(R.id.activityListTextViewSearchField);
         layoutManager  = new LinearLayoutManager(ListActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
         listElementAdaptor = new ListElementAdaptor(jobsList, ListActivity.this);
         recyclerView.setAdapter(listElementAdaptor);
         btnExit = findViewById(R.id.activityListButtonExit);
-        btnRemove = findViewById(R.id.activityListButtonUpdate);
+        btnUpdate = findViewById(R.id.activityListButtonUpdate);
         btnExit.setOnClickListener(v -> finish());
-
-/*
-        jobsList = getJobListFromPrevSession(getString(R.string.PREV_SESSION_JOB_LIST));
-        if (jobsList != null)
-        {
-            listElementAdaptor = new ListElementAdaptor(jobsList, this);
-        }
-        else
-        {
-            List fileData = csvReader();
-            jobsList = getJobObjects(fileData);
-            listElementAdaptor = new ListElementAdaptor(jobsList, this);
-        }
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(listElementAdaptor);
-*/
     }
-
-
-
 
     public void btnClickedUpdate(View view) {
         String searchStringInput_ = searchStringInput.getText().toString();
@@ -190,75 +168,8 @@ public class ListActivity extends AppCompatActivity implements ListElementAdapto
         super.onStop();
         if (isBound) {
             unbindService(jobServiceConnection);
+            isBound = false;
         }
     }
-
-/*
-    private List csvReader() {
-        InputStream stream = getResources().openRawResource(R.raw.jobs);
-        csvParser parser = new csvParser(stream);
-        return parser.getAssets();
-    }
-    */
-/*
-    private List<Job> getJobObjects(List<Job> fileData)
-    {
-        ArrayList<Job> jobList = new ArrayList<>();
-
-        for (int i = 0; i < fileData.size(); i++)
-        {
-            Job currentJob = fileData.get(i);
-            if(!currentJob.getCompanyName().equals("company"))
-            {
-                jobList.add(currentJob);
-            }
-        }
-
-        for (Job job : jobList)
-        {
-            job.setHasUserNotes(false);     //job.setNotes("");
-            job.setHasCoolnessScore(false); //job.setCoolScore("NA");
-            job.setHasApplied(false);
-            job.setCoolnessScore(job.getcoolnessScore());
-        }
-        return jobList;
-    }
-
-    @SuppressLint("MissingSuperCall")
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        listElementAdaptor.onActivityResult(requestCode, resultCode, data);
-    }
-*/
-/*
-    @Override
-    protected void onPause()
-    {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(jobsList);
-        editor.putString(getString(R.string.PREV_SESSION_JOB_LIST), json);
-        editor.apply();
-        super.onPause();
-    }
-*/
-/*
-    private List<Job> getJobListFromPrevSession(String index) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString(index, null);
-        Type type = new TypeToken<List<Job>>() {}.getType();
-        return gson.fromJson(json, type);
-    }
-*/
-//    @Override
-//    protected void OnActivityResult(int requestCode, int resultCode, Intent data)
-//    {
-//        listElementAdaptor.onActivityResult(requestCode, resultCode, data);
-//    }
-
-
 }
 

@@ -39,7 +39,6 @@ import dk.au543236Jobs.jobsearchonline.helpers.ToastHelper;
 
 
 
-/*TODO    ##################### THIS IS DONE ######################################*/
 
 
 
@@ -53,32 +52,32 @@ public class AsyncJobService extends Service {
     int updateDelay = 10000; //ms = 10 sec
 
 
-    private String alarmReciecerAction = "alarmReciever";
+    private String alarmReciecerAction = "alarmReceiver";
     public List<Job> favouriteJobsList = new ArrayList<>();
     public List<Job> currentJobList = new ArrayList<>();
     private static final String CHANNEL_ID = "jobServiceChannel";
-    private static final int NOTICATION_ID = 1;
+    private static final int NOTIFICATION_ID = 1;
     public static boolean isRunning = false;
     private RequestQueue queue;
-    public static final String BROADCAST_RESULT = "new jobs";
+    public static final String BROADCAST_RESULT = "New jobs downloaded";
     private static String searchBaseString = "https://jobs.github.com/positions.json?&search=";
     public static String searchBaseStringEmpty = "https://jobs.github.com/positions.json";
     private Job currentJob;
 
 
 
-    @Override
+    @Override   //cleaning the list, getting any saved jobs.
     public int onStartCommand(Intent intent, int flag, int startID) {
         notificationTimer();
         Notification jobNotification = buildNotification();
-        startForeground(NOTICATION_ID, jobNotification);
+        startForeground(NOTIFICATION_ID, jobNotification);
         isRunning = true;
         currentJobList.clear();
-        retrieveSavedJobsInList();
+        retrieveSavedJobs();
         return START_STICKY;
     }
 
-
+        // The weather search demo was useful insight here
     public void sendRequest(String url) {
         if (queue == null){
             queue = Volley.newRequestQueue(this);
@@ -138,7 +137,7 @@ public class AsyncJobService extends Service {
 
     private void listUpdaterNoSearch(Job[] jobs) {
         int sizeCurrentList = favouriteJobsList.size();
-        int numberOfJobs = (jobs.length >= 10 ? 10 : jobs.length);
+        int nbrOfJobs = (jobs.length >= 10 ? 10 : jobs.length);
 
         // remove non DB jobs.
         List<Job> tempJobs = favouriteJobsList;
@@ -146,20 +145,20 @@ public class AsyncJobService extends Service {
         currentJobList.addAll(favouriteJobsList);
 
         if (sizeCurrentList != 0) {
-            for (int i = 0; i < numberOfJobs; ++i) {
+            for (int i = 0; i < nbrOfJobs; ++i) {
                 if (!tempJobs.contains(jobs[i])) {
                     currentJobList.add(jobs[i]);
                 }
                 else {
-                    numberOfJobs++;
+                    nbrOfJobs++;
                 }
             }
         }
         else {
-            currentJobList.addAll(Arrays.asList(jobs).subList(0, numberOfJobs));
+            currentJobList.addAll(Arrays.asList(jobs).subList(0, nbrOfJobs));
         }
     }
-    //Local Broadcast
+    //More or less stolen from service demo
     public void sendBroadcast() {
         Intent intent = new Intent();
         intent.setAction(BROADCAST_RESULT);
@@ -170,12 +169,16 @@ public class AsyncJobService extends Service {
 
     private Notification buildNotification() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel jobServiceChannel = new NotificationChannel( CHANNEL_ID, getString(R.string.jobServiceChannel), NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel jobServiceChannel = new NotificationChannel(
+                    CHANNEL_ID,
+                    getString(R.string.jobServiceChannel),
+                    NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
             if (manager != null) {
                 manager.createNotificationChannel(jobServiceChannel);
             }
         }
+
         Intent intent = new Intent(this, ListActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
@@ -187,7 +190,7 @@ public class AsyncJobService extends Service {
                 .build();
     }
 
-    public void retrieveSavedJobsInList() {
+    public void retrieveSavedJobs() {
         GetJobListTask jobTask = new GetJobListTask(this);
         jobTask.execute();
     }
@@ -198,8 +201,7 @@ public class AsyncJobService extends Service {
     }
 
     public void removeJob(Job job) {
-        if (job != null) {
-            // delete job from list and from DB
+        if (job != null) {  // delete job from list and from DB
             if (job.getIsFavoriteMarked()) {
                 RemoveJobTask task = new RemoveJobTask(this);
                 task.execute(job);
@@ -258,12 +260,12 @@ public class AsyncJobService extends Service {
                     .setContentIntent(pendingIntent)
                     .setAutoCancel(true)
                     .build();
-            notificationManager.notify(NOTICATION_ID, notification);
+            notificationManager.notify(NOTIFICATION_ID, notification);
         }
     }
 
     private void notificationTimer() {
-        final int notificationInterval = 1000*60*2;
+        final int notificationInterval = 60000; //ms = 60 sec
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent intent = new Intent(alarmReciecerAction);
 
@@ -272,7 +274,7 @@ public class AsyncJobService extends Service {
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+notificationInterval, notificationInterval, pendingIntent);
         }
 
-        //Registering the reciever.
+        //Registering the receiver.
         IntentFilter filter = new IntentFilter(alarmReciecerAction);
         AlarmReceiver alarmReceiver = new AlarmReceiver();
         registerReceiver(alarmReceiver, filter);
@@ -298,94 +300,4 @@ public class AsyncJobService extends Service {
             randomJobNotify();
         }
     }
-
-
-
-/*
-
-
-        //  This was quite tricky ... I "stole" this from a StackOverflow post: https://bit.ly/2peEgHy
-        //  this should run the data loading part og the app Asynchronously
-    private void timedJobUpdate() {
-        final Handler handler = new Handler();
-        Timer timer = new Timer();
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                        }
-                        catch (Exception e) {
-                            Log.d(TAG, "timedJobUpdate task failed");
-                        }
-                    }
-                });
-            }
-        };
-        timer.schedule(timerTask,0, updateDelay);
-    }
-
-    public void broadcastTaskResult(List<Job> result) {
-        Log.d(TAG, "Shouting out Task Result (Broadcast)");
-        Intent intent = new Intent();
-        intent.setAction(getString(R.string.broadcastRXNotificationString));
-        intent.putExtra("Data", (Serializable) result);
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-    }
-
-    public Job updateJob(String companyName) {
-        Job job = new Job(companyName);
-
-        connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        String result = null;
-
-        //checking for internetconnection
-        if (networkInfo != null) {
-            // Get job Data in BG Thread.
-            AsyncJobService jobService = new AsyncJobService();
-            try {
-                // Getting string from JSON object
-                result = jobService.execute(companyName).get();
-                JSONObject jobData = new JSONObject(result);
-
-                job.update(jobData);
-            }
-            catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-            catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        else {
-            Toast.makeText(this, "No internet connection available", Toast.LENGTH_LONG).show();
-        }
-        return job;
-    }
-
-    public void addJob(String companyName) {
-        jobList.add(updateJob(companyName));
-        broadcastTaskResult(jobList);
-    }
-
-    public void removeJob(int position) {
-        jobList.remove(position);
-        broadcastTaskResult(jobList);
-    }
-
-    public void retrieveJobData() {
-        Log.d(TAG, "Retrieving Job data");
-        jobList.clear();    // to ensure no dupes
-        Log.d(TAG, "Recieved new Job Data");
-        
-    }
-
-*/
-
 }

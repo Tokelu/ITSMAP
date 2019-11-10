@@ -7,7 +7,6 @@ import java.lang.ref.WeakReference;
 import dk.au543236Jobs.jobsearchonline.models.Job;
 import dk.au543236Jobs.jobsearchonline.rooms.JobDb;
 
-/*TODO    ##################### THIS IS DONE ######################################*/
 
 
 public class RemoveJobTask extends AsyncTask<Job, Void, Void> {
